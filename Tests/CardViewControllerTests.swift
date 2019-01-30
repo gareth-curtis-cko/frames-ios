@@ -60,8 +60,8 @@ class CardViewControllerTests: XCTestCase {
         cardViewController.viewWillAppear(true)
         if let notificationCenterMock = cardViewController.notificationCenter as? NotificationCenterMock {
             XCTAssertEqual(notificationCenterMock.handlers.count, 2)
-            XCTAssertEqual(notificationCenterMock.handlers[0].name, NSNotification.Name.UIKeyboardWillShow)
-            XCTAssertEqual(notificationCenterMock.handlers[1].name, NSNotification.Name.UIKeyboardWillHide)
+            XCTAssertEqual(notificationCenterMock.handlers[0].name, UIResponder.keyboardWillShowNotification)
+            XCTAssertEqual(notificationCenterMock.handlers[1].name, UIResponder.keyboardWillHideNotification)
         } else {
             XCTFail("Notification center is not a mock")
         }
@@ -85,8 +85,8 @@ class CardViewControllerTests: XCTestCase {
         let coder = NSKeyedUnarchiver(forReadingWith: Data())
         let cardVC = CardViewControllerMock(coder: coder)
         cardVC?.viewDidLoad()
-        let notification = NSNotification(name: NSNotification.Name.UIKeyboardWillHide, object: nil, userInfo: [
-            UIKeyboardFrameBeginUserInfoKey: NSValue(cgRect: CGRect(x: 0, y: 0, width: 0, height: 300))
+        let notification = NSNotification(name: UIResponder.keyboardWillHideNotification, object: nil, userInfo: [
+            UIResponder.keyboardFrameBeginUserInfoKey: NSValue(cgRect: CGRect(x: 0, y: 0, width: 0, height: 300))
             ])
         cardVC?.keyboardWillShow(notification: notification)
         XCTAssertEqual(cardVC?.kbShowCalledTimes, 1)
@@ -99,8 +99,8 @@ class CardViewControllerTests: XCTestCase {
         let coder = NSKeyedUnarchiver(forReadingWith: Data())
         let cardVC = CardViewControllerMock(coder: coder)
         cardVC?.viewDidLoad()
-        let notification = NSNotification(name: NSNotification.Name.UIKeyboardWillHide, object: nil, userInfo: [
-            UIKeyboardFrameBeginUserInfoKey: NSValue(cgRect: CGRect(x: 0, y: 0, width: 0, height: 300))
+        let notification = NSNotification(name: UIResponder.keyboardWillHideNotification, object: nil, userInfo: [
+            UIResponder.keyboardFrameBeginUserInfoKey: NSValue(cgRect: CGRect(x: 0, y: 0, width: 0, height: 300))
             ])
         cardVC?.keyboardWillHide(notification: notification)
         XCTAssertEqual(cardVC?.kbHideCalledTimes, 1)

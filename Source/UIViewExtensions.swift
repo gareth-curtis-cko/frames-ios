@@ -84,7 +84,7 @@ extension UIView {
             prevButton.width = 30
             let nextButton = UIBarButtonItem(image: "keyboard-next".image(forClass: CardUtils.self),
                                              style: .plain, target: nil, action: nil)
-            let flexspace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace,
+            let flexspace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace,
                                             target: nil, action: nil)
             
             var items = [prevButton, nextButton, flexspace]
@@ -99,7 +99,7 @@ extension UIView {
             // last text field
             if index == textFields.count - 1 {
                 nextButton.isEnabled = false
-                let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: textField,
+                let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: textField,
                                                  action: #selector(UITextField.resignFirstResponder))
                 items.append(doneButton)
             } else {
