@@ -1,6 +1,18 @@
 import Foundation
 import UIKit
 
+/// Method that you can use to manage the editing of the expiration date.
+public protocol CardViewControllerDelegate: class {
+    
+    /// Executed when an user tap on the done button.
+    ///
+    /// - parameter controller: `CardViewController`
+    /// - parameter card: Card entered by the user
+    func onTapDone(controller: CardViewController, cardToken: CkoCardTokenResponse?, status: CheckoutTokenStatus)
+    
+    func onSubmit(controller: CardViewController)
+}
+
 /// A view controller that allows the user to enter card information.
 public class CardViewController: UIViewController,
     AddressViewControllerDelegate,
@@ -147,7 +159,7 @@ public class CardViewController: UIViewController,
         let year = String(calendar.component(.year, from: date))
         let monthString = month < 10 ? "0\(month)" : "\(month)"
         cardView.expirationDateInputView.textField.text =
-            "\(monthString)/\(year.substring(with: NSRange(location: 2, length: 2)))"
+            "\(monthString)/\(year.substring(fromRange: NSRange(location: 2, length: 2)))"
     }
 
     @objc func onTapAddressView() {

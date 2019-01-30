@@ -1,5 +1,15 @@
 import UIKit
 
+/// Method that you can use to manage the editing of the expiration date
+public protocol ExpirationDatePickerDelegate: class {
+    
+    /// Executed when the date is changed.
+    ///
+    /// - parameter month: Month
+    /// - parameter year: Year
+    func onDateChanged(month: String, year: String)
+}
+
 /// Expiration Date Picker is a control used for the inputting of expiration date.
 @IBDesignable public class ExpirationDatePicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
 

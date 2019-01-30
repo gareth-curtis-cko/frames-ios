@@ -19,4 +19,8 @@ extension String {
         return UIImage(named: self, in: bundle, compatibleWith: nil) ?? UIImage()
     }
 
+    func substring(fromRange: NSRange) -> String {
+        let nsString = self as NSString
+        return nsString.substring(with: fromRange)
+    }
 }

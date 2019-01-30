@@ -1,5 +1,19 @@
 import UIKit
 
+/// Method that you can use to handle the card number changes.
+public protocol CardNumberInputViewDelegate: class {
+    
+    /// Called when the card number changed.
+    ///
+    /// - parameter cardType: Type of the card number.
+    func onChangeCardNumber(cardType: CardType?)
+    
+    /// Tells the delegate that editing stopped for the text field in the specified view.
+    ///
+    /// - parameter view: View containing the text field
+    func textFieldDidEndEditing(view: UIView)
+}
+
 /// Card Number Input View containing a label and an input field.
 /// Handles the formatting of the text field.
 @IBDesignable public class CardNumberInputView: StandardInputView, UITextFieldDelegate {
@@ -74,7 +88,7 @@ import UIKit
         if var targetPosition = textField.position(from: textField.beginningOfDocument, offset: targetCursorPosition) {
             if targetCursorPosition != 0 {
                 let lastChar = cardNumberFormatted
-                    .substring(with: NSRange(location: targetCursorPosition - 1, length: 1))
+                    .substring(fromRange: NSRange(location: targetCursorPosition - 1, length: 1))
                 if lastChar == " " && previousTextCount < cardNumberFormatted.count {
                     targetPosition = textField
                         .position(from: textField.beginningOfDocument, offset: targetCursorPosition + 1)!
