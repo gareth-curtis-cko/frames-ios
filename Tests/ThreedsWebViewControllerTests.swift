@@ -91,18 +91,4 @@ class ThreedsWebViewControllerTests: XCTestCase {
         XCTAssertEqual(threedsWebViewController.webView.url?.absoluteString, url)
     }
 
-//    func testDismissIfSuccessUrl() {
-//        addAsModal(viewController: threedsWebViewController)
-//        let delegate = ThreedsWebViewControllerMockDelegate()
-//        threedsWebViewController.delegate = delegate
-//        loadUrl(url: "https://www.successurl.com")
-//        threedsWebViewController.webView.navigationDelegate?.webView!(threedsWebViewController.webView,
-//          didCommit: WKNavigation())
-//        XCTAssertEqual(delegate.onSuccess3DCalledTimes, 1)
-//    }
-//
-//    func testDismissIfFailUrl() {
-//
-//    }
-
 }

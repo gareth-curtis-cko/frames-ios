@@ -398,7 +398,8 @@
 			isa = PBXGroup;
 			children = (
 				E6640711208DDCF5000431E5 /* LinuxMain.swift */,
-				E6640715208DDFE6000431E5 /* Core */,
+				E67AB96D208DF9D800593FBE /* CardUtilsTests.swift */,
+				E67AB997208E2BBA00593FBE /* CheckoutAPIClientTests.swift */,
 				E67AB9A3208F412500593FBE /* Fixtures */,
 				E632AAB620B5771B00D2B9B6 /* Mocks */,
 				E67AB9A7208F4C8500593FBE /* Supporting Files */,
@@ -472,15 +473,6 @@
 				E625EE5B2090801C0019B750 /* CONTRIBUTING.md */,
 			);
 			name = Documentation;
-			sourceTree = "<group>";
-		};
-		E6640715208DDFE6000431E5 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				E67AB96D208DF9D800593FBE /* CardUtilsTests.swift */,
-				E67AB997208E2BBA00593FBE /* CheckoutAPIClientTests.swift */,
-			);
-			name = Core;
 			sourceTree = "<group>";
 		};
 		E67AB9A3208F412500593FBE /* Fixtures */ = {

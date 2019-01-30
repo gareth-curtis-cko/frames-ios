@@ -1,7 +1,6 @@
 import XCTest
-@testable import FramesIos
-
 import Mockingjay
+@testable import FramesIos
 
 class CheckoutAPIClientTests: XCTestCase {
 

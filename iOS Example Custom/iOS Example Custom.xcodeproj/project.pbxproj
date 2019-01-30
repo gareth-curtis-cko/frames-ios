@@ -14,7 +14,6 @@
 		E6BEBDD520C1778600C3130A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6BEBDD320C1778600C3130A /* Main.storyboard */; };
 		E6BEBDD720C1778800C3130A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6BEBDD620C1778800C3130A /* Assets.xcassets */; };
 		E6BEBDDA20C1778800C3130A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6BEBDD820C1778800C3130A /* LaunchScreen.storyboard */; };
-		E6BEBDE520C1778800C3130A /* iOS_Example_CustomUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BEBDE420C1778800C3130A /* iOS_Example_CustomUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,8 +50,6 @@
 		E6BEBDD920C1778800C3130A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E6BEBDDB20C1778800C3130A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6BEBDE020C1778800C3130A /* iOS Example CustomUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS Example CustomUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6BEBDE420C1778800C3130A /* iOS_Example_CustomUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_Example_CustomUITests.swift; sourceTree = "<group>"; };
-		E6BEBDE620C1778800C3130A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				E6BEBDCE20C1778600C3130A /* iOS Example Custom */,
-				E6BEBDE320C1778800C3130A /* iOS Example CustomUITests */,
 				E6BEBDCD20C1778600C3130A /* Products */,
 				E6BEBDEF20C18FBD00C3130A /* Frameworks */,
 			);
@@ -104,15 +100,6 @@
 				E6BEBDDB20C1778800C3130A /* Info.plist */,
 			);
 			path = "iOS Example Custom";
-			sourceTree = "<group>";
-		};
-		E6BEBDE320C1778800C3130A /* iOS Example CustomUITests */ = {
-			isa = PBXGroup;
-			children = (
-				E6BEBDE420C1778800C3130A /* iOS_Example_CustomUITests.swift */,
-				E6BEBDE620C1778800C3130A /* Info.plist */,
-			);
-			path = "iOS Example CustomUITests";
 			sourceTree = "<group>";
 		};
 		E6BEBDEF20C18FBD00C3130A /* Frameworks */ = {
@@ -234,7 +221,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6BEBDE520C1778800C3130A /* iOS_Example_CustomUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
