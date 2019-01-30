@@ -48,8 +48,7 @@ class ViewController: UIViewController {
     }
 
     private func getCardTokenRequest() -> CkoCardTokenRequest {
-        let cardUtils = CardUtils()
-        let cardNumber = cardUtils.standardize(cardNumber: cardNumberView.textField.text!)
+        let cardNumber = CardUtils.standardize(cardNumber: cardNumberView.textField.text!)
         let expirationDate = expirationDateView.textField.text
         let cvv = cvvView.textField.text
         let (expiryMonth, expiryYear) = cardUtils.standardize(expirationDate: expirationDate!)

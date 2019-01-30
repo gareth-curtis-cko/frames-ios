@@ -20,8 +20,6 @@ public protocol CardNumberInputViewDelegate: class {
 
     // MARK: - Properties
 
-    let cardsUtils = CardUtils()
-
     /// Text field delegate
     public weak var delegate: CardNumberInputViewDelegate?
 
@@ -62,8 +60,8 @@ public protocol CardNumberInputViewDelegate: class {
         // Card Number Formatting
         guard let text = textField.text else { return false }
 
-        let cardNumber = cardsUtils.standardize(cardNumber: "\(text)\(string)")
-        let cardType = cardsUtils.getTypeOf(cardNumber: cardNumber)
+        let cardNumber = CardUtils.standardize(cardNumber: "\(text)\(string)")
+        let cardType = CardUtils.getTypeOf(cardNumber: cardNumber)
         guard let cardTypeUnwrap = cardType, let lastValidLength = cardTypeUnwrap.validLengths.last else { return true }
         guard cardNumber.count <= lastValidLength else {
             return false
@@ -80,11 +78,11 @@ public protocol CardNumberInputViewDelegate: class {
 
         guard let text = textField.text else { return }
 
-        let cardNumber = cardsUtils.standardize(cardNumber: text)
-        let cardType = cardsUtils.getTypeOf(cardNumber: cardNumber)
+        let cardNumber = CardUtils.standardize(cardNumber: text)
+        let cardType = CardUtils.getTypeOf(cardNumber: cardNumber)
         guard let cardTypeUnwrap = cardType else { return }
         delegate?.onChangeCardNumber(cardType: cardType)
-        let cardNumberFormatted = cardsUtils.format(cardNumber: cardNumber, cardType: cardTypeUnwrap)
+        let cardNumberFormatted = CardUtils.format(cardNumber: cardNumber, cardType: cardTypeUnwrap)
         textField.text = cardNumberFormatted
 
         if var targetPosition = textField.position(from: textField.beginningOfDocument, offset: targetCursorPosition) {

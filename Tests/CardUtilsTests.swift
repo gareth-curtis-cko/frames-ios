@@ -3,7 +3,6 @@ import XCTest
 
 class CardUtilsTests: XCTestCase {
 
-    let cards = CardUtils()
     let visaCards = ["4651997672049328", "4485958561669511", "4929280692848862"]
     let mastercardCards = ["5185868732238239", "5490767572618494", "5336308433060853"]
     let amexCards = ["341347759839189", "346379996281789", "378587251292074"]
@@ -16,14 +15,14 @@ class CardUtilsTests: XCTestCase {
     let invalidCards = ["4651997672049324", "5185868732238231", "341347759839182", "30569309025906", "6011000400000004"]
 
     // Card types
-    var visaCardType: CardType { return cards.getCardType(scheme: .visa)! }
-    var mastercardCardType: CardType { return cards.getCardType(scheme: .mastercard)! }
-    var amexCardType: CardType { return cards.getCardType(scheme: .americanExpress)! }
-    var dinersClubCardType: CardType { return cards.getCardType(scheme: .dinersClub)! }
-    var discoverCardType: CardType { return cards.getCardType(scheme: .discover)! }
-    var unionPayCardType: CardType { return cards.getCardType(scheme: .unionPay)! }
-    var maestroCardType: CardType { return cards.getCardType(scheme: .maestro)! }
-    var jcbCardType: CardType { return cards.getCardType(scheme: .jcb)! }
+    let visaCardType = CardUtils.getCardType(scheme: .visa)!
+    let mastercardCardType = CardUtils.getCardType(scheme: .mastercard)!
+    let amexCardType = CardUtils.getCardType(scheme: .americanExpress)!
+    let dinersClubCardType = CardUtils.getCardType(scheme: .dinersClub)!
+    let discoverCardType = CardUtils.getCardType(scheme: .discover)!
+    let unionPayCardType = CardUtils.getCardType(scheme: .unionPay)!
+    let maestroCardType = CardUtils.getCardType(scheme: .maestro)!
+    let jcbCardType = CardUtils.getCardType(scheme: .jcb)!
 
     override func setUp() {
         super.setUp()
@@ -38,83 +37,83 @@ class CardUtilsTests: XCTestCase {
     func testLuhnCheckValid() {
         // Visa
         visaCards.forEach {
-            XCTAssertTrue(cards.luhnCheck(cardNumber: $0), "Visa card \($0)")
+            XCTAssertTrue(CardUtils.luhnCheck(cardNumber: $0), "Visa card \($0)")
         }
         // Mastercard
         mastercardCards.forEach {
-            XCTAssertTrue(cards.luhnCheck(cardNumber: $0), "Mastercard card \($0)")
+            XCTAssertTrue(CardUtils.luhnCheck(cardNumber: $0), "Mastercard card \($0)")
         }
         // American Express
         amexCards.forEach {
-            XCTAssertTrue(cards.luhnCheck(cardNumber: $0), "American Express card \($0)")
+            XCTAssertTrue(CardUtils.luhnCheck(cardNumber: $0), "American Express card \($0)")
         }
         // Diner's Club
         dinersClubCards.forEach {
-            XCTAssertTrue(cards.luhnCheck(cardNumber: $0), "Diner's Club card \($0)")
+            XCTAssertTrue(CardUtils.luhnCheck(cardNumber: $0), "Diner's Club card \($0)")
         }
         // Discover
         discoverCards.forEach {
-            XCTAssertTrue(cards.luhnCheck(cardNumber: $0), "Discover card \($0)")
+            XCTAssertTrue(CardUtils.luhnCheck(cardNumber: $0), "Discover card \($0)")
         }
         // Maestro
         maestroCards.forEach {
-            XCTAssertTrue(cards.luhnCheck(cardNumber: $0), "Maestro card \($0)")
+            XCTAssertTrue(CardUtils.luhnCheck(cardNumber: $0), "Maestro card \($0)")
         }
         // JCB
         jcbCards.forEach {
-            XCTAssertTrue(cards.luhnCheck(cardNumber: $0), "JCB card \($0)")
+            XCTAssertTrue(CardUtils.luhnCheck(cardNumber: $0), "JCB card \($0)")
         }
 
     }
 
     func testLuhnCheckInvalid() {
         invalidCards.forEach {
-            XCTAssertFalse(cards.luhnCheck(cardNumber: $0), "Invalid card \($0)")
+            XCTAssertFalse(CardUtils.luhnCheck(cardNumber: $0), "Invalid card \($0)")
         }
     }
 
     func testGetTypeOfCardNumber() {
         // Visa
         visaCards.forEach {
-            XCTAssertEqual(cards.getTypeOf(cardNumber: $0), cards.getCardType(scheme: .visa), "Visa card \($0)")
+            XCTAssertEqual(CardUtils.getTypeOf(cardNumber: $0), CardUtils.getCardType(scheme: .visa), "Visa card \($0)")
         }
         // Mastercard
         mastercardCards.forEach {
-            XCTAssertEqual(cards.getTypeOf(cardNumber: $0), cards.getCardType(scheme: .mastercard),
+            XCTAssertEqual(CardUtils.getTypeOf(cardNumber: $0), CardUtils.getCardType(scheme: .mastercard),
                            "Mastercard card \($0)")
         }
         // American Express
         amexCards.forEach {
-            XCTAssertEqual(cards.getTypeOf(cardNumber: $0), cards.getCardType(scheme: .americanExpress),
+            XCTAssertEqual(CardUtils.getTypeOf(cardNumber: $0), CardUtils.getCardType(scheme: .americanExpress),
                            "American Express card \($0)")
         }
         // Diner's Club
         dinersClubCards.forEach {
-            XCTAssertEqual(cards.getTypeOf(cardNumber: $0), cards.getCardType(scheme: .dinersClub),
+            XCTAssertEqual(CardUtils.getTypeOf(cardNumber: $0), CardUtils.getCardType(scheme: .dinersClub),
                            "Diner's Club card \($0)")
         }
         // Discover
         discoverCards.forEach {
-            XCTAssertEqual(cards.getTypeOf(cardNumber: $0), cards.getCardType(scheme: .discover),
+            XCTAssertEqual(CardUtils.getTypeOf(cardNumber: $0), CardUtils.getCardType(scheme: .discover),
                            "Discover card \($0)")
         }
         // Union Pay
         unionPayCards.forEach {
-            XCTAssertEqual(cards.getTypeOf(cardNumber: $0), cards.getCardType(scheme: .unionPay),
+            XCTAssertEqual(CardUtils.getTypeOf(cardNumber: $0), CardUtils.getCardType(scheme: .unionPay),
                            "Union Pay card \($0)")
         }
         // Maestro
         maestroCards.forEach {
-            XCTAssertEqual(cards.getTypeOf(cardNumber: $0), cards.getCardType(scheme: .maestro),
+            XCTAssertEqual(CardUtils.getTypeOf(cardNumber: $0), CardUtils.getCardType(scheme: .maestro),
                            "Maestro card \($0)")
         }
         // JCB
         jcbCards.forEach {
-            XCTAssertEqual(cards.getTypeOf(cardNumber: $0), cards.getCardType(scheme: .jcb),
+            XCTAssertEqual(CardUtils.getTypeOf(cardNumber: $0), CardUtils.getCardType(scheme: .jcb),
                            "JCB card \($0)")
         }
         // Unknown
-        XCTAssertNil(cards.getTypeOf(cardNumber: "1234567890"))
+        XCTAssertNil(CardUtils.getTypeOf(cardNumber: "1234567890"))
     }
 
     func testFormatCardNumber() {
@@ -124,56 +123,56 @@ class CardUtilsTests: XCTestCase {
             ["4485958561669511", "4485 9585 6166 9511"],
             ["4", "4"]
             ].forEach {
-                XCTAssertEqual(cards.format(cardNumber: $0[0], cardType: visaCardType), $0[1])
+                XCTAssertEqual(CardUtils.format(cardNumber: $0[0], cardType: visaCardType), $0[1])
         }
         // Mastercard
         [
             ["5185868732238239", "5185 8687 3223 8239"],
             ["5490767572618494", "5490 7675 7261 8494"]
             ].forEach {
-                XCTAssertEqual(cards.format(cardNumber: $0[0], cardType: mastercardCardType), $0[1])
+                XCTAssertEqual(CardUtils.format(cardNumber: $0[0], cardType: mastercardCardType), $0[1])
         }
         // American Express
         [
             ["341347759839189", "3413 477598 39189"],
             ["346379996281789", "3463 799962 81789"]
             ].forEach {
-                XCTAssertEqual(cards.format(cardNumber: $0[0], cardType: amexCardType), $0[1])
+                XCTAssertEqual(CardUtils.format(cardNumber: $0[0], cardType: amexCardType), $0[1])
         }
         // Diners Club
         [
             ["30569309025904", "3056 930902 5904"],
             ["38520000023237", "3852 000002 3237"]
             ].forEach {
-                XCTAssertEqual(cards.format(cardNumber: $0[0], cardType: dinersClubCardType), $0[1])
+                XCTAssertEqual(CardUtils.format(cardNumber: $0[0], cardType: dinersClubCardType), $0[1])
         }
         // Discover
         [
             ["6011000400000000", "6011 0004 0000 0000"],
             ["6011111111111117", "6011 1111 1111 1117"]
             ].forEach {
-                XCTAssertEqual(cards.format(cardNumber: $0[0], cardType: discoverCardType), $0[1])
+                XCTAssertEqual(CardUtils.format(cardNumber: $0[0], cardType: discoverCardType), $0[1])
         }
         // Union Pay
         [
             ["6269992058134322", "6269 992058 134322"],
             ["6221258812340000", "6221 258812 340000"]
             ].forEach {
-                XCTAssertEqual(cards.format(cardNumber: $0[0], cardType: unionPayCardType), $0[1])
+                XCTAssertEqual(CardUtils.format(cardNumber: $0[0], cardType: unionPayCardType), $0[1])
         }
         // Maestro
         [
             ["6921566956623303", "6921 5669 5662 3303"],
             ["6945584356562221", "6945 5843 5656 2221"]
             ].forEach {
-                XCTAssertEqual(cards.format(cardNumber: $0[0], cardType: maestroCardType), $0[1])
+                XCTAssertEqual(CardUtils.format(cardNumber: $0[0], cardType: maestroCardType), $0[1])
         }
         // JCB
         [
             ["3566002020360505", "3566 0020 2036 0505"],
             ["353445444300732639", "3534 4544 4300 732639"]
             ].forEach {
-                XCTAssertEqual(cards.format(cardNumber: $0[0], cardType: jcbCardType), $0[1])
+                XCTAssertEqual(CardUtils.format(cardNumber: $0[0], cardType: jcbCardType), $0[1])
         }
 
     }
@@ -181,37 +180,37 @@ class CardUtilsTests: XCTestCase {
     func testValidCardNumberWithType() {
         // Visa
         visaCards.forEach { cardNumber in
-            XCTAssertTrue(cards.isValid(cardNumber: cardNumber, cardType: visaCardType),
+            XCTAssertTrue(CardUtils.isValid(cardNumber: cardNumber, cardType: visaCardType),
                           "Visa card \(cardNumber)")
         }
         // Mastercard
         mastercardCards.forEach { cardNumber in
-            XCTAssertTrue(cards.isValid(cardNumber: cardNumber, cardType: mastercardCardType),
+            XCTAssertTrue(CardUtils.isValid(cardNumber: cardNumber, cardType: mastercardCardType),
                           "Mastercard card \(cardNumber)")
         }
         // American Express
         amexCards.forEach { cardNumber in
-            XCTAssertTrue(cards.isValid(cardNumber: cardNumber, cardType: amexCardType),
+            XCTAssertTrue(CardUtils.isValid(cardNumber: cardNumber, cardType: amexCardType),
                           "American Express card \(cardNumber)")
         }
         // Diner's Club
         dinersClubCards.forEach { cardNumber in
-            XCTAssertTrue(cards.isValid(cardNumber: cardNumber, cardType: dinersClubCardType),
+            XCTAssertTrue(CardUtils.isValid(cardNumber: cardNumber, cardType: dinersClubCardType),
                           "Diner's Club card \(cardNumber)")
         }
         // Discover
         discoverCards.forEach { cardNumber in
-            XCTAssertTrue(cards.isValid(cardNumber: cardNumber, cardType: discoverCardType),
+            XCTAssertTrue(CardUtils.isValid(cardNumber: cardNumber, cardType: discoverCardType),
                           "Discover card \(cardNumber)")
         }
         // Maestro
         maestroCards.forEach { cardNumber in
-            XCTAssertTrue(cards.isValid(cardNumber: cardNumber, cardType: maestroCardType),
+            XCTAssertTrue(CardUtils.isValid(cardNumber: cardNumber, cardType: maestroCardType),
                           "Maestro card \(cardNumber)")
         }
         // JCB
         jcbCards.forEach { cardNumber in
-            XCTAssertTrue(cards.isValid(cardNumber: cardNumber, cardType: jcbCardType), "JCB card \(cardNumber)")
+            XCTAssertTrue(CardUtils.isValid(cardNumber: cardNumber, cardType: jcbCardType), "JCB card \(cardNumber)")
         }
     }
 
@@ -223,15 +222,15 @@ class CardUtilsTests: XCTestCase {
             ]
         // Validate with the wrong card type
         invalidCards.forEach { cardNumber in
-                XCTAssertFalse(cards.isValid(cardNumber: cardNumber, cardType: jcbCardType))
+                XCTAssertFalse(CardUtils.isValid(cardNumber: cardNumber, cardType: jcbCardType))
         }
         // Visa
-        XCTAssertFalse(cards.isValid(cardNumber: "4651997672049323", cardType: visaCardType))
+        XCTAssertFalse(CardUtils.isValid(cardNumber: "4651997672049323", cardType: visaCardType))
         // Mastercard
-        XCTAssertFalse(cards.isValid(cardNumber: "5185868732238231", cardType: mastercardCardType))
+        XCTAssertFalse(CardUtils.isValid(cardNumber: "5185868732238231", cardType: mastercardCardType))
         // UnionPay
-        XCTAssertFalse(cards.isValid(cardNumber: "62699920581", cardType: unionPayCardType))
-        XCTAssertFalse(cards.isValid(cardNumber: "6221558812340000567678", cardType: unionPayCardType))
+        XCTAssertFalse(CardUtils.isValid(cardNumber: "62699920581", cardType: unionPayCardType))
+        XCTAssertFalse(CardUtils.isValid(cardNumber: "6221558812340000567678", cardType: unionPayCardType))
     }
 
     func testValidCardNumber() {
@@ -239,7 +238,7 @@ class CardUtilsTests: XCTestCase {
             discoverCards + maestroCards + jcbCards
 
         cardNumbers.forEach { cardNumber in
-            XCTAssertTrue(cards.isValid(cardNumber: cardNumber),
+            XCTAssertTrue(CardUtils.isValid(cardNumber: cardNumber),
                           "card \(cardNumber)")
         }
     }
@@ -253,15 +252,15 @@ class CardUtilsTests: XCTestCase {
         ]
         // Validate with the wrong card type
         invalidCards.forEach { cardNumber in
-            XCTAssertFalse(cards.isValid(cardNumber: cardNumber))
+            XCTAssertFalse(CardUtils.isValid(cardNumber: cardNumber))
         }
         // Visa
-        XCTAssertFalse(cards.isValid(cardNumber: "4651997672049323"))
+        XCTAssertFalse(CardUtils.isValid(cardNumber: "4651997672049323"))
         // Mastercard
-        XCTAssertFalse(cards.isValid(cardNumber: "5185868732238231"))
+        XCTAssertFalse(CardUtils.isValid(cardNumber: "5185868732238231"))
         // UnionPay
-        XCTAssertFalse(cards.isValid(cardNumber: "62699920581"))
-        XCTAssertFalse(cards.isValid(cardNumber: "6221558812340000567678"))
+        XCTAssertFalse(CardUtils.isValid(cardNumber: "62699920581"))
+        XCTAssertFalse(CardUtils.isValid(cardNumber: "6221558812340000567678"))
     }
 
     func testValidExpirationDate() {
@@ -271,7 +270,7 @@ class CardUtilsTests: XCTestCase {
             ["05", "21"],
             ["06", "19"]
         ].forEach { date in
-            XCTAssertTrue(cards.isValid(expirationMonth: date[0], expirationYear: date[1]))
+            XCTAssertTrue(CardUtils.isValid(expirationMonth: date[0], expirationYear: date[1]))
         }
     }
 
@@ -284,21 +283,21 @@ class CardUtilsTests: XCTestCase {
             ["08", "021"],
             ["hello", "world"]
         ].forEach { date in
-            XCTAssertFalse(cards.isValid(expirationMonth: date[0], expirationYear: date[1]))
+            XCTAssertFalse(CardUtils.isValid(expirationMonth: date[0], expirationYear: date[1]))
         }
     }
 
     func testValidCvv() {
-        XCTAssertTrue(cards.isValid(cvv: "100", cardType: visaCardType))
-        XCTAssertTrue(cards.isValid(cvv: "999", cardType: visaCardType))
-        XCTAssertTrue(cards.isValid(cvv: "9991", cardType: amexCardType))
+        XCTAssertTrue(CardUtils.isValid(cvv: "100", cardType: visaCardType))
+        XCTAssertTrue(CardUtils.isValid(cvv: "999", cardType: visaCardType))
+        XCTAssertTrue(CardUtils.isValid(cvv: "9991", cardType: amexCardType))
     }
 
     func testInvalidCvv() {
-        XCTAssertFalse(cards.isValid(cvv: "1", cardType: visaCardType))
-        XCTAssertFalse(cards.isValid(cvv: "9991", cardType: visaCardType))
-        XCTAssertFalse(cards.isValid(cvv: "999", cardType: amexCardType))
-        XCTAssertFalse(cards.isValid(cvv: "100", cardType: amexCardType))
+        XCTAssertFalse(CardUtils.isValid(cvv: "1", cardType: visaCardType))
+        XCTAssertFalse(CardUtils.isValid(cvv: "9991", cardType: visaCardType))
+        XCTAssertFalse(CardUtils.isValid(cvv: "999", cardType: amexCardType))
+        XCTAssertFalse(CardUtils.isValid(cvv: "100", cardType: amexCardType))
     }
 
     func testStandardizeCardNumber() {
@@ -307,7 +306,7 @@ class CardUtilsTests: XCTestCase {
             ["4242424 24242copypaste some text with it", "424242424242"],
             ["ao23ao23ao23ao23", "23232323"]
         ].forEach { cardNumbers in
-            XCTAssertEqual(cards.standardize(cardNumber: cardNumbers[0]), cardNumbers[1])
+            XCTAssertEqual(CardUtils.standardize(cardNumber: cardNumbers[0]), cardNumbers[1])
         }
     }
 
@@ -324,7 +323,7 @@ class CardUtilsTests: XCTestCase {
         ]
 
         tests.forEach { expirationDates in
-            let (month: actualMonth, year: actualYear) = cards.standardize(expirationDate: expirationDates[0])
+            let (month: actualMonth, year: actualYear) = CardUtils.standardize(expirationDate: expirationDates[0])
             XCTAssertEqual(actualMonth, expirationDates[1])
             XCTAssertEqual(actualYear, expirationDates[2])
         }

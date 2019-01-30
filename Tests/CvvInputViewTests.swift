@@ -39,7 +39,7 @@ class CvvInputViewTests: XCTestCase {
 
     func testDoNotChangeCvvIfExceedingCardTypeMaxLength() {
         cvvInputView.textField.text = "100"
-        cvvInputView.cardType = CardUtils().getCardType(scheme: .visa)
+        cvvInputView.cardType = CardUtils.getCardType(scheme: .visa)
         let shouldChange = cvvInputView.textField(cvvInputView.textField,
                                                   shouldChangeCharactersIn: NSRange(),
                                                   replacementString: "9")
@@ -48,7 +48,7 @@ class CvvInputViewTests: XCTestCase {
 
     func testDoChangeCvvIfNotExceedingCardTypeMaxLength() {
         cvvInputView.textField.text = "100"
-        cvvInputView.cardType = CardUtils().getCardType(scheme: .americanExpress)
+        cvvInputView.cardType = CardUtils.getCardType(scheme: .americanExpress)
         let shouldChange = cvvInputView.textField(cvvInputView.textField,
                                                   shouldChangeCharactersIn: NSRange(),
                                                   replacementString: "0")

@@ -55,10 +55,8 @@ The error handler takes an `ErrorResponse` as a parameter.
 You can get the `CardType` of a card number.
 
 ```swift
-let cardUtils = CardUtils()
-
 let cardNumber = "4242424242424242"
-let cardType = cardUtils.getTypeOf(cardNumber: cardNumber)
+let cardType = CardUtils.getTypeOf(cardNumber: cardNumber)
 ```
 
 ### Formatting a card number
@@ -66,11 +64,9 @@ let cardType = cardUtils.getTypeOf(cardNumber: cardNumber)
 You can format the card number based on the card type (e.g. Visa card: 4242 4242 4242 4242).
 
 ```swift
-let cardUtils = CardUtils()
-
 let cardNumber = "4242424242424242"
-let cardType = cardUtils.getTypeOf(cardNumber: cardNumber)
-let cardNumberFormatted = cardUtils.format(cardNumber: cardNumber, cardType: cardType)
+let cardType = CardUtils.getTypeOf(cardNumber: cardNumber)
+let cardNumberFormatted = CardUtils.format(cardNumber: cardNumber, cardType: cardType)
 print(cardNumberFormatted) // 4242 4242 4242 4242
 ```
 
@@ -79,10 +75,8 @@ print(cardNumberFormatted) // 4242 4242 4242 4242
 You can transform a card number by removing any non digits characters and spaces.
 
 ```swift
-let cardUtils = CardUtils()
-
 let cardNumber = "4242 | 4242 | 4242 | 4242 "
-let cardNumberStandardized = cardUtils.standardize(cardNumber: cardNumber)
+let cardNumberStandardized = CardUtils.standardize(cardNumber: cardNumber)
 print(cardNumberStandardized) // "4242424242424242"
 ```
 
@@ -92,7 +86,6 @@ You can validate a card number.
 
 ```swift
 let cardNumber = "4242424242424242"
-let cardUtils = CardUtils()
-let isCardValid = cardUtils.isValid(cardNumber: cardNumber)
+let isCardValid = CardUtils.isValid(cardNumber: cardNumber)
 print(isCardValid) // true
 ```

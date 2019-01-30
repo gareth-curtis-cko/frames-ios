@@ -6,7 +6,7 @@ public class CardUtils {
     // MARK: - Properties
 
     /// Dictionary of card types based on their scheme
-    let cardTypes: DictionaryLiteral<CardScheme, CardType> = [
+    static let cardTypes: DictionaryLiteral<CardScheme, CardType> = [
         .visa: CardType(scheme: .visa,
                         name: "Visa",
                         pattern: "^4\\d*$",
@@ -69,13 +69,6 @@ public class CardUtils {
                            isLuhnChecked: true)
     ]
 
-    // MARK: - Initialization
-
-    /// Create an instance of `CardUtils`
-    ///
-    /// - returns: The new `CardUtils` instance
-    public init() {}
-
     // MARK: - Methods
 
     /// Perform the lunh check algorithm to determine the validity of a card number
@@ -85,7 +78,7 @@ public class CardUtils {
     ///
     ///
     /// - returns: true if the card valid the lunh check algorithm, false otherwise
-    public func luhnCheck(cardNumber: String) -> Bool {
+    public class func luhnCheck(cardNumber: String) -> Bool {
         let digits = Array(cardNumber)
         var sum = 0
         var oddDigit = true
@@ -108,7 +101,7 @@ public class CardUtils {
     ///
     ///
     /// - returns: The card type corresponding to the card number, nil if no card type is found
-    public func getTypeOf(cardNumber: String) -> CardType? {
+    public class func getTypeOf(cardNumber: String) -> CardType? {
         for (_, cardType) in cardTypes {
             if cardNumber.range(of: cardType.pattern, options: .regularExpression) != nil {
                 return cardType
@@ -125,7 +118,7 @@ public class CardUtils {
     ///
     ///
     /// - returns: The formatted card number
-    public func format(cardNumber: String, cardType: CardType) -> String {
+    public class func format(cardNumber: String, cardType: CardType) -> String {
         var index = 0
         var numberOfGaps = 0
         return cardNumber.reduce("") {
@@ -145,7 +138,7 @@ public class CardUtils {
     ///
     ///
     /// - returns: true if the card number is valid, false otherwise
-    public func isValid(cardNumber: String) -> Bool {
+    public class func isValid(cardNumber: String) -> Bool {
         let cardType = getTypeOf(cardNumber: cardNumber)
         return cardType != nil ? isValid(cardNumber: cardNumber, cardType: cardType!) : false
     }
@@ -157,7 +150,7 @@ public class CardUtils {
     ///
     ///
     /// - returns: true if the card number is valid, false otherwise
-    public func isValid(cardNumber: String, cardType: CardType) -> Bool {
+    public class func isValid(cardNumber: String, cardType: CardType) -> Bool {
         if cardType.isLuhnChecked {
             guard luhnCheck(cardNumber: cardNumber) else { return false }
         }
@@ -171,7 +164,7 @@ public class CardUtils {
     ///
     ///
     /// - returns: true if the cvv is valid, false otherwise
-    public func isValid(cvv: String, cardType: CardType) -> Bool {
+    public class func isValid(cvv: String, cardType: CardType) -> Bool {
         return cardType.validCvvLengths.contains { $0 == cvv.count }
     }
 
@@ -182,7 +175,7 @@ public class CardUtils {
     ///
     ///
     /// - returns: true if the expiration date is valid, false otherwise
-    public func isValid(expirationMonth: String, expirationYear: String) -> Bool {
+    public class func isValid(expirationMonth: String, expirationYear: String) -> Bool {
         // check month and year are accepted values
         guard expirationMonth.count == 2 else { return false }
         guard expirationYear.count == 4 || expirationYear.count == 2 else { return false }
@@ -207,7 +200,7 @@ public class CardUtils {
     ///
     ///
     /// - returns: The card number standardized.
-    public func standardize(cardNumber: String) -> String {
+    public class func standardize(cardNumber: String) -> String {
         return cardNumber.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
     }
 
@@ -217,7 +210,7 @@ public class CardUtils {
     ///
     ///
     /// - returns: Expiry month and expiry year (month: 05, year: 21)
-    public func standardize(expirationDate: String) -> (month: String, year: String) {
+    public class func standardize(expirationDate: String) -> (month: String, year: String) {
         let digitOnlyDate = expirationDate.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         switch digitOnlyDate.count {
         case ..<1:
@@ -249,7 +242,7 @@ public class CardUtils {
     ///
     ///
     /// - returns: The card type corresponding to the scheme, nil if no card type is found
-    public func getCardType(scheme: CardScheme) -> CardType? {
+    public class func getCardType(scheme: CardScheme) -> CardType? {
         return cardTypes.first(where: { $0.key == scheme})?.value
     }
 }

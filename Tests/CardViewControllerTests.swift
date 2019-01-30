@@ -271,14 +271,14 @@ class CardViewControllerTests: XCTestCase {
     func testChangeCvvCardTypeOnCardNumberEndEditing() {
         cardViewController.cardView.cardNumberInputView.textField.text = "4242 4242 4242 4242"
         cardViewController.textFieldDidEndEditing(view: cardViewController.cardView.cardNumberInputView)
-        let visaType = CardUtils().getCardType(scheme: .visa)
+        let visaType = CardUtils.getCardType(scheme: .visa)
         XCTAssertEqual(cardViewController.cardView.cvvInputView.cardType, visaType)
     }
 
     func testSetImageHighlightedOnChangeCardType() {
         cardViewController.availableSchemes = [.visa, .mastercard, .discover, .dinersClub]
         cardViewController.cardView.schemeIconsStackView.setIcons(schemes: cardViewController.availableSchemes)
-        cardViewController.onChangeCardNumber(cardType: CardUtils().getCardType(scheme: .visa))
+        cardViewController.onChangeCardNumber(cardType: CardUtils.getCardType(scheme: .visa))
         let nFadedCard = cardViewController.cardView.schemeIconsStackView.arrangedSubviews
             .filter { $0.alpha == 0.5}.count
         XCTAssertEqual(nFadedCard, 4)
@@ -286,7 +286,7 @@ class CardViewControllerTests: XCTestCase {
 
     func testChangeImageHighlightedOChangeCardType() {
         testSetImageHighlightedOnChangeCardType()
-        cardViewController.onChangeCardNumber(cardType: CardUtils().getCardType(scheme: .mastercard))
+        cardViewController.onChangeCardNumber(cardType: CardUtils.getCardType(scheme: .mastercard))
         let nFadedCard = cardViewController.cardView.schemeIconsStackView.arrangedSubviews
             .filter { $0.alpha == 0.5}.count
         XCTAssertEqual(nFadedCard, 4)

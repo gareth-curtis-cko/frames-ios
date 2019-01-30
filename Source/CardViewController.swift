@@ -24,8 +24,6 @@ public class CardViewController: UIViewController,
 
     /// Card View
     public let cardView: CardView
-    let cardUtils = CardUtils()
-
     public let checkoutApiClient: CheckoutAPIClient?
 
     let cardHolderNameState: InputState
@@ -170,16 +168,16 @@ public class CardViewController: UIViewController,
         guard let expirationDate = cardView.expirationDateInputView.textField.text else { return }
         guard let cvv = cardView.cvvInputView.textField.text else { return }
 
-        let cardNumberStandardized = cardUtils.standardize(cardNumber: cardNumber)
+        let cardNumberStandardized = CardUtils.standardize(cardNumber: cardNumber)
         // Validate the values
         guard
-            let cardType = cardUtils.getTypeOf(cardNumber: cardNumberStandardized)
+            let cardType = CardUtils.getTypeOf(cardNumber: cardNumberStandardized)
             else { return }
-        let (expiryMonth, expiryYear) = cardUtils.standardize(expirationDate: expirationDate)
+        let (expiryMonth, expiryYear) = CardUtils.standardize(expirationDate: expirationDate)
         // card number invalid
-        let isCardNumberValid = cardUtils.isValid(cardNumber: cardNumberStandardized, cardType: cardType)
-        let isExpirationDateValid = cardUtils.isValid(expirationMonth: expiryMonth, expirationYear: expiryYear)
-        let isCvvValid = cardUtils.isValid(cvv: cvv, cardType: cardType)
+        let isCardNumberValid = CardUtils.isValid(cardNumber: cardNumberStandardized, cardType: cardType)
+        let isExpirationDateValid = CardUtils.isValid(expirationMonth: expiryMonth, expirationYear: expiryYear)
+        let isCvvValid = CardUtils.isValid(cvv: cvv, cardType: cardType)
         let isCardTypeValid = availableSchemes.contains(where: { cardType.scheme == $0 })
 
         // check if the card type is amongst the valid ones
@@ -278,8 +276,8 @@ public class CardViewController: UIViewController,
 
         if let superView = view as? CardNumberInputView {
             guard let cardNumber = superView.textField.text else { return }
-            let cardNumberStandardized = cardUtils.standardize(cardNumber: cardNumber)
-            let cardType = cardUtils.getTypeOf(cardNumber: cardNumberStandardized)
+            let cardNumberStandardized = CardUtils.standardize(cardNumber: cardNumber)
+            let cardType = CardUtils.getTypeOf(cardNumber: cardNumberStandardized)
             cardView.cvvInputView.cardType = cardType
         }
     }

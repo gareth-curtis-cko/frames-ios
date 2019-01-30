@@ -132,18 +132,12 @@ let checkoutAPIClient = CheckoutAPIClient(publicKey: "pk_test_6ff46046-30af-41d9
                                           environment: .sandbox)
 ```
 
-#### Create the `CardUtils` instance:
-
-```swift
-let cardUtils = CardUtils()
-```
-
 #### Use `CardUtils` to verify card number:
 
 ```swift
 /// verify card number
 let cardNumber = "4242424242424242"
-let isCardValid = cardUtils.isValid(cardNumber: cardNumber)
+let isCardValid = CardUtils.isValid(cardNumber: cardNumber)
 ```
 
 #### Create the card token request `CardTokenRequest`:
