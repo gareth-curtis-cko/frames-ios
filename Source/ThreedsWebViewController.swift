@@ -17,7 +17,7 @@ public class ThreedsWebViewController: UIViewController,
 
     // MARK: - Properties
 
-    var webView: WKWebView!
+    let webView: WKWebView
     let successUrl: String
     let failUrl: String
 
@@ -33,6 +33,7 @@ public class ThreedsWebViewController: UIViewController,
     public init(successUrl: String, failUrl: String) {
         self.successUrl = successUrl
         self.failUrl = failUrl
+        webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -40,6 +41,7 @@ public class ThreedsWebViewController: UIViewController,
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         successUrl = ""
         failUrl = ""
+        webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
@@ -47,6 +49,7 @@ public class ThreedsWebViewController: UIViewController,
     required public init?(coder aDecoder: NSCoder) {
         successUrl = ""
         failUrl = ""
+        webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
         super.init(coder: aDecoder)
     }
 
@@ -54,8 +57,6 @@ public class ThreedsWebViewController: UIViewController,
 
     /// Creates the view that the controller manages.
     public override func loadView() {
-        let webConfiguration = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: webConfiguration)
         view = webView
     }
 
@@ -63,9 +64,8 @@ public class ThreedsWebViewController: UIViewController,
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let authUrl = url else { return }
-        let myURL = URL(string: authUrl)
-        let myRequest = URLRequest(url: myURL!)
+        guard let url = url, let authUrl = URL(string: url) else { return }
+        let myRequest = URLRequest(url: authUrl)
         webView.navigationDelegate = self
         webView.load(myRequest)
     }
@@ -73,16 +73,18 @@ public class ThreedsWebViewController: UIViewController,
     // MARK: - WKNavigationDelegate
 
     /// Called when the web view begins to receive web content.
-    public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        shouldDismiss(absoluteUrl: webView.url!)
+    public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation) {
+        guard let url = webView.url else { return }
+        shouldDismiss(absoluteUrl: url)
     }
 
     /// Called when a web view receives a server redirect.
     public func webView(_ webView: WKWebView,
-                        didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+                        didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation) {
+        guard let url = webView.url else { return }
         // stop the redirection
         webView.stopLoading()
-        shouldDismiss(absoluteUrl: webView.url!)
+        shouldDismiss(absoluteUrl: url)
     }
 
     private func shouldDismiss(absoluteUrl: URL) {
@@ -91,12 +93,12 @@ public class ThreedsWebViewController: UIViewController,
 
         if url == successUrl {
             // success url, dismissing the page with the payment token
-            self.dismiss(animated: true) {
+            dismiss(animated: true) {
                 self.delegate?.onSuccess3D()
             }
         } else if url == failUrl {
             // fail url, dismissing the page
-            self.dismiss(animated: true) {
+            dismiss(animated: true) {
                 self.delegate?.onFailure3D()
             }
         }

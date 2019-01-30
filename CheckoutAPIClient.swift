@@ -15,7 +15,7 @@ public class CheckoutAPIClient {
 
     /// headers used for the requests
     private var headers: [String: String] {
-        return ["Authorization": self.publicKey,
+        return ["Authorization": publicKey,
                 "Content-Type": "application/json"]
     }
 

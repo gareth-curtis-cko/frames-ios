@@ -146,8 +146,8 @@ public class CardUtils {
     ///
     /// - returns: true if the card number is valid, false otherwise
     public func isValid(cardNumber: String) -> Bool {
-        let cardType = self.getTypeOf(cardNumber: cardNumber)
-        return cardType != nil ? self.isValid(cardNumber: cardNumber, cardType: cardType!) : false
+        let cardType = getTypeOf(cardNumber: cardNumber)
+        return cardType != nil ? isValid(cardNumber: cardNumber, cardType: cardType!) : false
     }
 
     /// Check if the card number is valid based on the card type

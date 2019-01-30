@@ -107,8 +107,7 @@ public class CardViewController: UIViewController,
         cardView.schemeIconsStackView.setIcons(schemes: availableSchemes)
         setInitialDate()
 
-        self.automaticallyAdjustsScrollViewInsets = false
-
+        automaticallyAdjustsScrollViewInsets = false
     }
 
     /// Notifies the view controller that its view is about to be added to a view hierarchy.
@@ -133,18 +132,17 @@ public class CardViewController: UIViewController,
         cardView.leftAnchor.constraint(equalTo: view.safeLeftAnchor).isActive = true
         cardView.rightAnchor.constraint(equalTo: view.safeRightAnchor).isActive = true
 
-        self.topConstraint = cardView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor)
+        topConstraint = cardView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor)
         if #available(iOS 11.0, *) {
             cardView.topAnchor.constraint(equalTo: view.safeTopAnchor).isActive = true
         } else {
-            self.topConstraint?.isActive = true
+            topConstraint?.isActive = true
         }
         cardView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         if #available(iOS 11.0, *) {} else {
-            cardView.scrollView.contentSize = CGSize(width: self.view.frame.width,
-                                                        height: self.view.frame.height + 10)
+            cardView.scrollView.contentSize = CGSize(width: view.frame.width,
+                                                        height: view.frame.height + 10)
         }
-
     }
 
     /// MARK: Methods
@@ -168,9 +166,9 @@ public class CardViewController: UIViewController,
 
     @objc func onTapDoneCardButton() {
         // Get the values
-        let cardNumber = cardView.cardNumberInputView.textField.text!
-        let expirationDate = cardView.expirationDateInputView.textField.text!
-        let cvv = cardView.cvvInputView.textField.text!
+        guard let cardNumber = cardView.cardNumberInputView.textField.text else { return }
+        guard let expirationDate = cardView.expirationDateInputView.textField.text else { return }
+        guard let cvv = cardView.cvvInputView.textField.text else { return }
 
         let cardNumberStandardized = cardUtils.standardize(cardNumber: cardNumber)
         // Validate the values
@@ -205,7 +203,7 @@ public class CardViewController: UIViewController,
                                     name: cardView.cardHolderNameInputView.textField.text,
                                     billingDetails: billingDetailsAddress)
         if let checkoutApiClientUnwrap = checkoutApiClient {
-            self.delegate?.onSubmit(controller: self)
+            delegate?.onSubmit(controller: self)
             checkoutApiClientUnwrap.createCardToken(card: card, successHandler: { cardToken in
                 self.delegate?.onTapDone(controller: self, cardToken: cardToken, status: .success)
             }, errorHandler: { _ in
@@ -223,7 +221,7 @@ public class CardViewController: UIViewController,
         cardView.billingDetailsInputView.value.text = value
         validateFieldsValues()
         // return to CardViewController
-        self.topConstraint?.isActive = false
+        topConstraint?.isActive = false
         controller.navigationController?.popViewController(animated: true)
     }
 
@@ -236,9 +234,9 @@ public class CardViewController: UIViewController,
     }
 
     private func validateFieldsValues() {
-        let cardNumber = cardView.cardNumberInputView.textField.text!
-        let expirationDate = cardView.expirationDateInputView.textField.text!
-        let cvv = cardView.cvvInputView.textField.text!
+        guard let cardNumber = cardView.cardNumberInputView.textField.text else { return }
+        guard let expirationDate = cardView.expirationDateInputView.textField.text else { return }
+        guard let cvv = cardView.cvvInputView.textField.text else { return }
 
         // check card holder's name
         if cardHolderNameState == .required && (cardView.cardHolderNameInputView.textField.text?.isEmpty)! {
@@ -279,7 +277,7 @@ public class CardViewController: UIViewController,
         validateFieldsValues()
 
         if let superView = view as? CardNumberInputView {
-            let cardNumber = superView.textField.text!
+            guard let cardNumber = superView.textField.text else { return }
             let cardNumberStandardized = cardUtils.standardize(cardNumber: cardNumber)
             let cardType = cardUtils.getTypeOf(cardNumber: cardNumberStandardized)
             cardView.cvvInputView.cardType = cardType
@@ -305,7 +303,7 @@ public class CardViewController: UIViewController,
             imageView?.alpha = 1
             lastSelected = imageView
         } else {
-            lastSelected!.alpha = 0.5
+            lastSelected?.alpha = 0.5
             imageView?.alpha = 1
             lastSelected = imageView
         }

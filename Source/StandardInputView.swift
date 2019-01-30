@@ -13,7 +13,7 @@ import UIKit
     public let errorLabel = UILabel()
     let tapGesture = UITapGestureRecognizer()
     // height constraint
-    var heightConstraint: NSLayoutConstraint!
+    var heightConstraint: NSLayoutConstraint?
     let stackview = UIStackView()
     let contentView = UIView()
     let errorView = UIView()
@@ -49,13 +49,13 @@ import UIKit
         tapGesture.addTarget(self, action: #selector(StandardInputView.onTapView))
 
         #if TARGET_INTERFACE_BUILDER
-        if self.placeholder.isEmpty {
-            self.placeholder = "placeholder"
+        if placeholder.isEmpty {
+            placeholder = "placeholder"
         }
         #endif
 
         // add gesture recognizer
-        addGestureRecognizer(self.tapGesture)
+        addGestureRecognizer(tapGesture)
 
         // add values
         textField.keyboardType = .default
@@ -104,7 +104,7 @@ import UIKit
         stackview.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         stackview.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         heightConstraint = stackview.heightAnchor.constraint(equalToConstant: 48)
-        heightConstraint.isActive = true
+        heightConstraint?.isActive = true
 
         errorView.heightAnchor.constraint(equalToConstant: 32).isActive = true
         errorLabel.topAnchor.constraint(equalTo: errorView.topAnchor).isActive = true
@@ -139,14 +139,14 @@ import UIKit
     public func showError(message: String) {
         errorView.isHidden = false
         errorLabel.text = message
-        heightConstraint.constant = 48 + 32
+        heightConstraint?.constant = 48 + 32
         layoutIfNeeded()
     }
 
     /// Hide the error message
     public func hideError() {
         errorView.isHidden = true
-        heightConstraint.constant = 48
+        heightConstraint?.constant = 48
         layoutIfNeeded()
     }
 }

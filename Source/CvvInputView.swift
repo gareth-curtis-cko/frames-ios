@@ -44,8 +44,8 @@ import UIKit
         guard cvv.count <= maxLengthCvv else {
             return false
         }
-        if let cardType = self.cardType {
-            if cvv.count > cardType.validCvvLengths.last! { return false }
+        if let cardType = cardType, let lastValidLength = cardType.validCvvLengths.last {
+            if cvv.count > lastValidLength { return false }
         }
         return true
     }

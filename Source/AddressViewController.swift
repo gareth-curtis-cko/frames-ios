@@ -19,7 +19,7 @@ public class AddressViewController: UIViewController,
     // MARK: - Properties
 
     /// Address View
-    public let addressView: AddressView! = AddressView(frame: .zero)
+    public let addressView = AddressView(frame: .zero)
     let countrySelectionViewController = CountrySelectionViewController()
     let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done,
                                      target: self, action: nil)
@@ -71,7 +71,7 @@ public class AddressViewController: UIViewController,
                 setCountrySelected(country: countryNameUnwrap, regionCode: regionCodeSelectedUnwrap)
             }
         }
-        self.navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.isTranslucent = false
 
         validateFieldsValues()
     }
@@ -100,8 +100,8 @@ public class AddressViewController: UIViewController,
         addressView.topAnchor.constraint(equalTo: view.safeTopAnchor).isActive = true
         addressView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor).isActive = true
         if #available(iOS 11.0, *) {} else {
-            addressView.scrollView.contentSize = CGSize(width: self.view.frame.width,
-                                                        height: self.view.frame.height + 10)
+            addressView.scrollView.contentSize = CGSize(width: view.frame.width,
+                                                        height: view.frame.height + 10)
         }
     }
 

@@ -31,7 +31,7 @@ class StandardInputViewTests: XCTestCase {
 
     func testTextFieldBecomeFirstResponderOnTap() {
         standardInputView.onTapView()
-        XCTAssertTrue(self.standardInputView.textField.isFirstResponder)
+        XCTAssertTrue(standardInputView.textField.isFirstResponder)
     }
 
     func testSetTextAndBackgroundColor() {

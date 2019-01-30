@@ -34,7 +34,7 @@ public class CardView: UIView {
     let cardHolderNameState: InputState
     let billingDetailsState: InputState
 
-    var scrollViewBottomConstraint: NSLayoutConstraint!
+    var scrollViewBottomConstraint: NSLayoutConstraint?
 
     // MARK: - Initialization
 
@@ -128,12 +128,12 @@ public class CardView: UIView {
     }
 
     private func addInitialConstraints() {
-        scrollViewBottomConstraint = self.addScrollViewContraints(scrollView: scrollView, contentView: contentView)
+        scrollViewBottomConstraint = addScrollViewContraints(scrollView: scrollView, contentView: contentView)
         acceptedCardLabel.translatesAutoresizingMaskIntoConstraints = false
         schemeIconsStackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        self.translatesAutoresizingMaskIntoConstraints = false
+        translatesAutoresizingMaskIntoConstraints = false
 
         acceptedCardLabel.trailingAnchor
             .constraint(equalTo: contentView.trailingAnchor, constant: -8)

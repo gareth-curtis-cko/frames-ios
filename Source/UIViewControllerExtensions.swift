@@ -19,12 +19,10 @@ extension UIViewController {
 
             // If active text field is hidden by keyboard, scroll it so it's visible
             // Your app might not need or want this behavior.
-            var aRect: CGRect = self.view.frame
+            var aRect: CGRect = view.frame
             aRect.size.height -= size.height
-            let activeTextFieldRect: CGRect? = activeField.frame
-            let activeTextFieldOrigin: CGPoint? = activeTextFieldRect?.origin
-            if !aRect.contains(activeTextFieldOrigin!) {
-                scrollView.scrollRectToVisible(activeTextFieldRect!, animated: true)
+            if !aRect.contains(activeField.frame.origin) {
+                scrollView.scrollRectToVisible(activeField.frame, animated: true)
             }
         }
     }

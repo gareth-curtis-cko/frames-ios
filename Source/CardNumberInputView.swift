@@ -20,7 +20,8 @@ public protocol CardNumberInputViewDelegate: class {
 
     // MARK: - Properties
 
-    var cardsUtils: CardUtils!
+    let cardsUtils = CardUtils()
+
     /// Text field delegate
     public weak var delegate: CardNumberInputViewDelegate?
 
@@ -41,9 +42,6 @@ public protocol CardNumberInputViewDelegate: class {
     }
 
     private func setup() {
-        #if !TARGET_INTERFACE_BUILDER
-        cardsUtils = CardUtils()
-        #endif
         textField.keyboardType = .default
         textField.textContentType = .creditCardNumber
         textField.font = CheckoutTheme.font
@@ -62,10 +60,12 @@ public protocol CardNumberInputViewDelegate: class {
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
                           replacementString string: String) -> Bool {
         // Card Number Formatting
-        let cardNumber = cardsUtils!.standardize(cardNumber: "\(textField.text!)\(string)")
+        guard let text = textField.text else { return false }
+
+        let cardNumber = cardsUtils.standardize(cardNumber: "\(text)\(string)")
         let cardType = cardsUtils.getTypeOf(cardNumber: cardNumber)
-        guard let cardTypeUnwrap = cardType else { return true }
-        guard cardNumber.count <= cardTypeUnwrap.validLengths.last! else {
+        guard let cardTypeUnwrap = cardType, let lastValidLength = cardTypeUnwrap.validLengths.last else { return true }
+        guard cardNumber.count <= lastValidLength else {
             return false
         }
         return true
@@ -78,7 +78,9 @@ public protocol CardNumberInputViewDelegate: class {
             targetCursorPosition = textField.offset(from: textField.beginningOfDocument, to: startPosition)
         }
 
-        let cardNumber = cardsUtils!.standardize(cardNumber: textField.text!)
+        guard let text = textField.text else { return }
+
+        let cardNumber = cardsUtils.standardize(cardNumber: text)
         let cardType = cardsUtils.getTypeOf(cardNumber: cardNumber)
         guard let cardTypeUnwrap = cardType else { return }
         delegate?.onChangeCardNumber(cardType: cardType)

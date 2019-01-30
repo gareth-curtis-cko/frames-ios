@@ -43,8 +43,8 @@ public struct CkoCardTokenRequest: Codable {
     }
 
     public func createWith(shippingDetails: CkoAddress) -> CkoCardTokenRequest {
-        return CkoCardTokenRequest(number: self.number, expiryMonth: self.expiryMonth,
-                                   expiryYear: self.expiryYear, cvv: self.cvv, name: self.name,
+        return CkoCardTokenRequest(number: number, expiryMonth: expiryMonth,
+                                   expiryYear: expiryYear, cvv: cvv, name: name,
                                    billingDetails: shippingDetails)
     }
 }

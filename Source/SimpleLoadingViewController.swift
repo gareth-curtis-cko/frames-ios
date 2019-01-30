@@ -25,7 +25,7 @@ public class SimpleLoadingViewController: UIViewController {
     }
 
     private func addViews() {
-        self.view.addSubview(container)
+        view.addSubview(container)
         container.addSubview(label)
         container.addSubview(activityIndicator)
     }

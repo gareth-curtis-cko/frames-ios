@@ -43,7 +43,7 @@ public class CardListCell: UITableViewCell {
     }
 
     private func addConstraints() {
-        self.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        heightAnchor.constraint(equalToConstant: 50).isActive = true
         // constraints
         stackView.translatesAutoresizingMaskIntoConstraints = false
         schemeImageView.translatesAutoresizingMaskIntoConstraints = false

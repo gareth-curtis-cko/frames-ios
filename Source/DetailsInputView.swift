@@ -45,7 +45,7 @@ import UIKit
         value.font = CheckoutTheme.font
 
         #if TARGET_INTERFACE_BUILDER
-        self.button = UIButton(type: UIButtonType.contactAdd)
+        button = UIButton(type: UIButtonType.contactAdd)
         value!.text = "value"
         #else
         let image = "arrows/keyboard-next".image(forClass: DetailsInputView.self)

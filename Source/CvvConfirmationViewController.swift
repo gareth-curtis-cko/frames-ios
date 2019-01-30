@@ -62,7 +62,7 @@ public class CvvConfirmationViewController: UIViewController {
         contentView.addSubview(label)
         contentView.addSubview(textField)
         contentView.addSubview(underlineView)
-        self.view.addSubview(contentView)
+        view.addSubview(contentView)
     }
 
     private func addConstraints() {

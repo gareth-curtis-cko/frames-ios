@@ -14,13 +14,13 @@ import PhoneNumberKit
 
     /// National Number (e.g. )
     public var nationalNumber: String {
-        let rawNumber = self.textField.text ?? ""
+        let rawNumber = textField.text ?? ""
         return partialFormatter.nationalNumber(from: rawNumber)
     }
 
     /// True if the phone number is valid, false otherwise
     public var isValidNumber: Bool {
-        let rawNumber = self.textField.text ?? ""
+        let rawNumber = textField.text ?? ""
         do {
             phoneNumber = try phoneNumberKit.parse(rawNumber.replacingOccurrences(of: " ", with: ""))
             return true
@@ -64,7 +64,8 @@ import PhoneNumberKit
             targetCursorPosition = textField.offset(from: textField.beginningOfDocument, to: startPosition)
         }
 
-        let phoneNumber = textField.text!
+        guard let phoneNumber = textField.text else { return }
+
         let formatted = partialFormatter.formatPartial(phoneNumber)
         textField.text = formatted
 

@@ -75,10 +75,10 @@ public protocol ExpirationDatePickerDelegate: class {
         let year = calendar.component(.year, from: date)
 
         let monthIndex = month - 1
-        let yearIndex = years.index(of: String(year))
+        guard let yearIndex = years.index(of: String(year)) else { return }
 
         selectRow(monthIndex, inComponent: 0, animated: animated)
-        selectRow(yearIndex!, inComponent: 1, animated: animated)
+        selectRow(yearIndex, inComponent: 1, animated: animated)
     }
 
     // MARK: - UIPickerViewDelegate
