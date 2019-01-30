@@ -3,13 +3,13 @@ import UIKit
 
 /// Methods used to handle action on the cvv confirmation page
 public protocol CvvConfirmationViewControllerDelegate: class {
-    
+
     /// Called when the user confirms the cvv
     ///
     /// - parameter controller: `CvvConfirmationViewController`
     /// - parameter cvv: cvv
     func onConfirm(controller: CvvConfirmationViewController, cvv: String)
-    
+
     /// Called when the user cancel
     ///
     /// - parameter controller: `CvvConfirmationViewController`
@@ -18,7 +18,7 @@ public protocol CvvConfirmationViewControllerDelegate: class {
 
 /// Method that you can use to handle the cvv changes.
 public protocol CvvInputViewDelegate: class {
-    
+
     /// Called when the cvv changed.
     func onChangeCvv()
 }

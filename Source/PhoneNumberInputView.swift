@@ -76,7 +76,8 @@ import PhoneNumberKit
                         .position(from: textField.beginningOfDocument, offset: targetCursorPosition + 1)!
                 }
             }
-            if (previousFormat.filter{$0 == " "}.count != formatted.filter{$0 == " "}.count) && phoneNumber != formatted {
+            if (previousFormat.filter {$0 == " "}.count != formatted.filter {$0 == " "}.count)
+                    && phoneNumber != formatted {
                 targetPosition = textField
                     .position(from: textField.beginningOfDocument, offset: targetCursorPosition + 1)!
             }

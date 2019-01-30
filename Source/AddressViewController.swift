@@ -3,7 +3,7 @@ import UIKit
 
 /// Method that you can use to handle when the user press done to save the address.
 public protocol AddressViewControllerDelegate: class {
-    
+
     /// Executed when an user tap on the done button.
     ///
     /// - parameter controller: `AddressViewController`
@@ -72,7 +72,7 @@ public class AddressViewController: UIViewController,
             }
         }
         self.navigationController?.navigationBar.isTranslucent = false
-        
+
         validateFieldsValues()
     }
 
@@ -210,9 +210,9 @@ public class AddressViewController: UIViewController,
         addressView.zipInputView.textField.text = address.postcode
         addressView.countryRegionInputView.value.text = address.country
         if address.phone != nil {
-            addressView.phoneInputView.textField.text = "+\(address.phone?.countryCode ?? "")\(address.phone?.number ?? "")"
+            let formattedString = "+\(address.phone?.countryCode ?? "")\(address.phone?.number ?? "")"
+            addressView.phoneInputView.textField.text = formattedString
         }
-        
     }
 
 }
