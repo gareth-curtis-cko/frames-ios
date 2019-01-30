@@ -71,7 +71,7 @@ public class CardUtils {
 
     // MARK: - Methods
 
-    /// Perform the lunh check algorithm to determine the validity of a card number
+    /// Perform the luhn check algorithm to determine the validity of a card number
     /// Note: the card number must be without spaces
     ///
     /// - parameter cardNumber: Card number
