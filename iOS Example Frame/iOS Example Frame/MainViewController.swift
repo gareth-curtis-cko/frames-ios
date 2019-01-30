@@ -23,9 +23,9 @@ class MainViewController: UIViewController, CardViewControllerDelegate {
     }
 
     var cardViewController: CardViewController {
-        let checkoutAPIClient = CheckoutAPIClient(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
+        let checkoutService = CheckoutService(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
                                                   environment: .sandbox)
-        let b = CardViewController(checkoutApiClient: checkoutAPIClient, cardHolderNameState: .normal, billingDetailsState: .normal, defaultRegionCode: "UK")
+        let b = CardViewController(checkoutApiClient: checkoutService, cardHolderNameState: .normal, billingDetailsState: .normal, defaultRegionCode: "UK")
         b.billingDetailsAddress = CkoAddress(addressLine1: "yo", addressLine2: "yo", city: "yo", state: "yo", postcode: "yo", country: "uk", phone: nil)
         b.delegate = self
         b.addressViewController.setFields(address: b.billingDetailsAddress!)

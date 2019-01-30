@@ -89,12 +89,12 @@ import Frames
 ```swift
 class ViewController: UIViewController, CardViewControllerDelegate {
 
-    let checkoutAPIClient = CheckoutAPIClient(publicKey: "pk_test_6ff46046-30af-41d9-bf58-929022d2cd14",
+    let checkoutService = CheckoutService(publicKey: "pk_test_6ff46046-30af-41d9-bf58-929022d2cd14",
                                               environment: .sandbox)
     var cardViewController: CardViewController {
-        let checkoutAPIClient = CheckoutAPIClient(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
+        let checkoutService = CheckoutService(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
         environment: .sandbox)
-        return CardViewController(checkoutApiClient: checkoutAPIClient, cardHolderNameState: .hidden, billingDetailsState: .hidden)
+        return CardViewController(checkoutApiClient: checkoutService, cardHolderNameState: .hidden, billingDetailsState: .hidden)
     }
 
     override func viewDidLoad() {
@@ -110,7 +110,7 @@ class ViewController: UIViewController, CardViewControllerDelegate {
     }
 
     func onTapDone(controller: CardViewController, card: CkoCardTokenRequest) {
-        checkoutAPIClient.createCardToken(card: card, successHandler: { cardToken in
+        checkoutService.createCardToken(card: card, successHandler: { cardToken in
             print(cardToken.id)
         }, errorHandler: { error in
             print(error)
@@ -124,11 +124,11 @@ class ViewController: UIViewController, CardViewControllerDelegate {
 
 You can find more examples on the [usage guide](https://checkout.github.io/frames-ios/usage.html).
 
-#### Create the API Client `CheckoutAPIClient`:
+#### Create the API Client `CheckoutService`:
 
 ```swift
 // replace "pk_test_6ff46046-30af-41d9-bf58-929022d2cd14" by your own public key
-let checkoutAPIClient = CheckoutAPIClient(publicKey: "pk_test_6ff46046-30af-41d9-bf58-929022d2cd14",
+let checkoutService = CheckoutService(publicKey: "pk_test_6ff46046-30af-41d9-bf58-929022d2cd14",
                                           environment: .sandbox)
 ```
 
@@ -154,14 +154,14 @@ let cardTokenRequest = CkoCardTokenRequest(number:expiryMonth:expiryYear:cvv:nam
 #### Create a card token:
 
 ```swift
-let checkoutAPIClient = CheckoutAPIClient(publicKey: "pk_......", environment: .live)
+let checkoutService = CheckoutService(publicKey: "pk_......", environment: .live)
 // create the phone number
 let phoneNumber = CkoPhoneNumber(countryCode:number:)
 // create the address
 let address = CkoAddress(name:addressLine1:addressLine2:city:state:postcode:country:phone:)
 // create the card token request
 let cardTokenRequest = CkoCardTokenRequest(number:expiryMonth:expiryYear:cvv:name:billingAddress:)
-checkoutAPIClient.createCardToken(card: cardTokenRequest, successHandler: { cardTokenResponse in
+checkoutService.createCardToken(card: cardTokenRequest, successHandler: { cardTokenResponse in
     // success
 }, errorHandler { error in
     // error
@@ -175,13 +175,13 @@ The error handler takes an `ErrorResponse` as a parameter.
 
 ```swift
 var cardViewController: CardViewController {
-    let checkoutAPIClient = CheckoutAPIClient(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
+    let checkoutService = CheckoutService(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
         environment: .sandbox)
     CheckoutTheme.primaryBackgroundColor = .blue
     CheckoutTheme.secondaryBackgroundColor = .purple
     CheckoutTheme.errorColor = .yellow
     CheckoutTheme.color = .green
-    return CardViewController(checkoutApiClient: checkoutAPIClient, cardHolderNameState: .hidden, billingDetailsState: .normal)
+    return CardViewController(checkoutApiClient: checkoutService, cardHolderNameState: .hidden, billingDetailsState: .normal)
 }
 ```
 

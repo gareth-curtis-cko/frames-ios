@@ -1,9 +1,8 @@
 import Foundation
 import Alamofire
 
-/// Checkout API Client
-/// used to call the api endpoint of Checkout API available with your public key
-public class CheckoutAPIClient {
+/// Used to call the Checkout API available with your public key
+public class CheckoutService {
 
     // MARK: - Properties
 
@@ -36,10 +35,10 @@ public class CheckoutAPIClient {
     /// Create an instance with the specified public key and environment
     ///
     /// - parameter publicKey: Checkout public key
-    /// - parameter environment: Sandbox or Live (default to sandbox)
+    /// - parameter environment: Sandbox or Live (defaults to sandbox)
     ///
     ///
-    /// - returns: The new `CheckoutAPIClient` instance
+    /// - returns: The new `CheckoutService` instance
     public init(publicKey: String, environment: Environment = .sandbox) {
         self.publicKey = publicKey
         self.environment = environment

@@ -63,7 +63,7 @@
 		E658532A20D80B3700C261D7 /* CvvInputViewMockDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E658532920D80B3700C261D7 /* CvvInputViewMockDelegate.swift */; };
 		E65EF60D20E3A34700CC70F0 /* ApplePayErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65EF60C20E3A34700CC70F0 /* ApplePayErrorResponse.swift */; };
 		E66406D92089FA39000431E5 /* CheckoutSdkIos.h in Headers */ = {isa = PBXBuildFile; fileRef = E66406D72089FA39000431E5 /* CheckoutSdkIos.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6640710208DD550000431E5 /* CheckoutAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E664070F208DD550000431E5 /* CheckoutAPIClient.swift */; };
+		E6640710208DD550000431E5 /* CheckoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E664070F208DD550000431E5 /* CheckoutService.swift */; };
 		E664071B208DE11D000431E5 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E664071A208DE11D000431E5 /* Endpoint.swift */; };
 		E664071D208DE174000431E5 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E664071C208DE174000431E5 /* CardType.swift */; };
 		E664071F208DE199000431E5 /* CardScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E664071E208DE199000431E5 /* CardScheme.swift */; };
@@ -198,7 +198,7 @@
 		E66406D42089FA39000431E5 /* FramesIos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FramesIos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E66406D72089FA39000431E5 /* CheckoutSdkIos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckoutSdkIos.h; sourceTree = "<group>"; };
 		E66406D82089FA39000431E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E664070F208DD550000431E5 /* CheckoutAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutAPIClient.swift; sourceTree = "<group>"; };
+		E664070F208DD550000431E5 /* CheckoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutService.swift; sourceTree = "<group>"; };
 		E6640711208DDCF5000431E5 /* LinuxMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
 		E664071A208DE11D000431E5 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		E664071C208DE174000431E5 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
@@ -369,7 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				E6640720208DE2AA000431E5 /* CardUtils.swift */,
-				E664070F208DD550000431E5 /* CheckoutAPIClient.swift */,
+				E664070F208DD550000431E5 /* CheckoutService.swift */,
 				E6D0208621943DE10025D0C0 /* CheckoutTheme.swift */,
 				E6640707208A0753000431E5 /* Model */,
 				E631CB7D2098B5A800023472 /* ViewControllers */,
@@ -791,7 +791,7 @@
 				E631CB7F2098B5C000023472 /* ExpirationDatePicker.swift in Sources */,
 				E6DC28F820A19F3C009FA38B /* DetailsInputView.swift in Sources */,
 				E680EBCD20A9E75C000BEED8 /* CardListCell.swift in Sources */,
-				E6640710208DD550000431E5 /* CheckoutAPIClient.swift in Sources */,
+				E6640710208DD550000431E5 /* CheckoutService.swift in Sources */,
 				E653FF0020C59CCC002E4790 /* CvvConfirmationViewController.swift in Sources */,
 				E6640721208DE2AA000431E5 /* CardUtils.swift in Sources */,
 				E6837288209C62A200C11D67 /* ExpirationDateInputView.swift in Sources */,

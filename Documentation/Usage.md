@@ -6,21 +6,21 @@
 import Frames
 ```
 
-Two classes are available globally: `CheckoutAPIClient` and `CardUtils`.
-`CheckoutAPIClient` is used to call the Checkout API with your public key.
+Two classes are available globally: `CheckoutService` and `CardUtils`.
+`CheckoutService` is used to call the Checkout API with your public key.
 `CardUtils` contains methods to use for handling a payment form.
 
-### Instantiate `CheckoutAPIClient`
+### Instantiate `CheckoutService`
 
 ```swift
-let checkoutAPIClient = CheckoutAPIClient(publicKey: "pk_......", environment: .live)
+let checkoutService = CheckoutService(publicKey: "pk_......", environment: .live)
 ```
 
 ### Get the list of card providers
 
 ```swift
-let checkoutAPIClient = CheckoutAPIClient(publicKey: "pk_......", environment: .live)
-checkoutAPIClient.getCardProviders(successHandler: { cardProviders in
+let checkoutService = CheckoutService(publicKey: "pk_......", environment: .live)
+checkoutService.getCardProviders(successHandler: { cardProviders in
     // success
 }, errorHandler: { error in
     // error
@@ -33,14 +33,14 @@ The error handler takes an `ErrorResponse` as a parameter.
 ### Create a card token
 
 ```swift
-let checkoutAPIClient = CheckoutAPIClient(publicKey: "pk_......", environment: .live)
+let checkoutService = CheckoutService(publicKey: "pk_......", environment: .live)
 // create the phone number
 let phoneNumber = CkoPhoneNumber(countryCode:number:)
 // create the address
 let address = CkoAddress(name:addressLine1:addressLine2:city:state:postcode:country:phone:)
 // create the card token request
 let cardTokenRequest = CkoCardTokenRequest(number:expiryMonth:expiryYear:cvv:name:billingAddress:)
-checkoutAPIClient.createCardToken(card: cardTokenRequest, successHandler: { cardTokenResponse in
+checkoutService.createCardToken(card: cardTokenRequest, successHandler: { cardTokenResponse in
     // success
 }, errorHandler { error in
     // error

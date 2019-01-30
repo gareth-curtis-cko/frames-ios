@@ -2,9 +2,9 @@ import XCTest
 import Mockingjay
 @testable import FramesIos
 
-class CheckoutAPIClientTests: XCTestCase {
+class CheckoutServiceTests: XCTestCase {
 
-    let checkoutAPIClient: CheckoutAPIClient = CheckoutAPIClient(
+    let checkoutService: CheckoutService = CheckoutService(
         publicKey: "pk_test_6ff46046-30af-41d9-bf58-929022d2cd14",
         environment: .sandbox)
 
@@ -25,7 +25,7 @@ class CheckoutAPIClientTests: XCTestCase {
         stub(everything, delay: 0, jsonData(data as Data))
         // Test the function
         let expectation = XCTestExpectation(description: "Get card providers")
-        checkoutAPIClient.getCardProviders(successHandler: { cardProviders in
+        checkoutService.getCardProviders(successHandler: { cardProviders in
             XCTAssertNotNil(cardProviders)
             expectation.fulfill()
         }, errorHandler: { _ in
@@ -46,7 +46,7 @@ class CheckoutAPIClientTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Create card token")
         let cardRequest = CardTokenRequest(number: "", expiryMonth: 0, expiryYear: 0, cvv: "")
 
-        checkoutAPIClient.createCardToken(card: cardRequest, successHandler: { cardToken in
+        checkoutService.createCardToken(card: cardRequest, successHandler: { cardToken in
             XCTAssertNotNil(cardToken)
             XCTAssertNotNil(cardToken.token)
             expectation.fulfill()
@@ -64,7 +64,7 @@ class CheckoutAPIClientTests: XCTestCase {
         // Test the function
         let expectation = XCTestExpectation(description: "Create card token (error)")
         let cardRequest = CardTokenRequest(number: "", expiryMonth: 0, expiryYear: 0, cvv: "")
-        checkoutAPIClient.createCardToken(card: cardRequest, successHandler: { _ in
+        checkoutService.createCardToken(card: cardRequest, successHandler: { _ in
         }, errorHandler: { error in
             XCTAssertNotNil(error)
             XCTAssertEqual(error.errorCode, "70000")
@@ -84,7 +84,7 @@ class CheckoutAPIClientTests: XCTestCase {
         let cardRequest = CkoCardTokenRequest(number: "", expiryMonth: "", expiryYear: "",
                                               cvv: "", name: nil, billingDetails: nil)
 
-        checkoutAPIClient.createCardToken(card: cardRequest, successHandler: { cardToken in
+        checkoutService.createCardToken(card: cardRequest, successHandler: { cardToken in
             XCTAssertNotNil(cardToken)
             XCTAssertNotNil(cardToken.id)
             expectation.fulfill()
@@ -103,7 +103,7 @@ class CheckoutAPIClientTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Create card token (error)")
         let cardRequest = CkoCardTokenRequest(number: "", expiryMonth: "", expiryYear: "", cvv: "",
                                               name: nil, billingDetails: nil)
-        checkoutAPIClient.createCardToken(card: cardRequest, successHandler: { _ in
+        checkoutService.createCardToken(card: cardRequest, successHandler: { _ in
         }, errorHandler: { error in
             XCTAssertNotNil(error)
             XCTAssertEqual(error.errorCode, "70000")
@@ -121,7 +121,7 @@ class CheckoutAPIClientTests: XCTestCase {
         // Test the function
         let expectation = XCTestExpectation(description: "create apple pay token")
         let applePayData = Data()
-        checkoutAPIClient.createApplePayToken(paymentData: applePayData, successHandler: { applePayToken in
+        checkoutService.createApplePayToken(paymentData: applePayData, successHandler: { applePayToken in
             XCTAssertNotNil(applePayToken)
             XCTAssertNotNil(applePayToken.token)
             XCTAssertNotNil(applePayToken.expiresOn)

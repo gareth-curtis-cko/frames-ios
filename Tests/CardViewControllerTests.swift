@@ -28,9 +28,9 @@ class CardViewControllerTests: XCTestCase {
     }
 
     func testInitializationHiddenFields() {
-        let checkoutAPIClient = CheckoutAPIClient(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
+        let checkoutService = CheckoutService(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
                                                   environment: .sandbox)
-        let cardViewController = CardViewController(checkoutApiClient: checkoutAPIClient,
+        let cardViewController = CardViewController(checkoutApiClient: checkoutService,
                                                     cardHolderNameState: .hidden, billingDetailsState: .hidden)
         XCTAssertEqual(cardViewController.cardHolderNameState, .hidden)
         XCTAssertEqual(cardViewController.billingDetailsState, .hidden)
@@ -110,9 +110,9 @@ class CardViewControllerTests: XCTestCase {
 
     func testValidateFieldsWithRequiredBillingDetailsMissing() {
         // Setup
-        let checkoutAPIClient = CheckoutAPIClient(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
+        let checkoutService = CheckoutService(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
                                                   environment: .sandbox)
-        let cardViewController = CardViewController(checkoutApiClient: checkoutAPIClient,
+        let cardViewController = CardViewController(checkoutApiClient: checkoutService,
                                                     cardHolderNameState: .hidden, billingDetailsState: .required)
         cardViewController.viewDidLoad()
         XCTAssertFalse((cardViewController.navigationItem.rightBarButtonItem?.isEnabled)!)
@@ -124,9 +124,9 @@ class CardViewControllerTests: XCTestCase {
 
     func testValidateFieldsWithRequiredNameMissing() {
         // Setup
-        let checkoutAPIClient = CheckoutAPIClient(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
+        let checkoutService = CheckoutService(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
                                                   environment: .sandbox)
-        let cardViewController = CardViewController(checkoutApiClient: checkoutAPIClient,
+        let cardViewController = CardViewController(checkoutApiClient: checkoutService,
                                                     cardHolderNameState: .required, billingDetailsState: .hidden)
         cardViewController.viewDidLoad()
         XCTAssertFalse((cardViewController.navigationItem.rightBarButtonItem?.isEnabled)!)
@@ -138,9 +138,9 @@ class CardViewControllerTests: XCTestCase {
 
     func testValidateFields() {
         // Setup
-        let checkoutAPIClient = CheckoutAPIClient(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
+        let checkoutService = CheckoutService(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
                                                   environment: .sandbox)
-        let cardViewController = CardViewController(checkoutApiClient: checkoutAPIClient,
+        let cardViewController = CardViewController(checkoutApiClient: checkoutService,
                                                     cardHolderNameState: .hidden, billingDetailsState: .hidden)
         cardViewController.viewDidLoad()
         XCTAssertFalse((cardViewController.navigationItem.rightBarButtonItem?.isEnabled)!)
@@ -155,9 +155,9 @@ class CardViewControllerTests: XCTestCase {
 
     func testValidateFieldsWithEmptyValues() {
         // Setup
-        let checkoutAPIClient = CheckoutAPIClient(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
+        let checkoutService = CheckoutService(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
                                                   environment: .sandbox)
-        let cardViewController = CardViewController(checkoutApiClient: checkoutAPIClient,
+        let cardViewController = CardViewController(checkoutApiClient: checkoutService,
                                                     cardHolderNameState: .hidden, billingDetailsState: .hidden)
         cardViewController.viewDidLoad()
         XCTAssertFalse((cardViewController.navigationItem.rightBarButtonItem?.isEnabled)!)

@@ -24,7 +24,7 @@ public class CardViewController: UIViewController,
 
     /// Card View
     public let cardView: CardView
-    public let checkoutApiClient: CheckoutAPIClient?
+    public let checkoutApiClient: CheckoutService?
 
     let cardHolderNameState: InputState
     let billingDetailsState: InputState
@@ -54,7 +54,7 @@ public class CardViewController: UIViewController,
 
     /// Returns a newly initialized view controller with the cardholder's name and billing details
     /// state specified. You can specified the region using the Iso2 region code ("UK" for "United Kingdom")
-    public init(checkoutApiClient: CheckoutAPIClient, cardHolderNameState: InputState,
+    public init(checkoutApiClient: CheckoutService, cardHolderNameState: InputState,
                 billingDetailsState: InputState, defaultRegionCode: String? = nil) {
         self.checkoutApiClient = checkoutApiClient
         self.cardHolderNameState = cardHolderNameState

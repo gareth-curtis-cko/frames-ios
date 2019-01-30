@@ -47,13 +47,13 @@ Select **iOS Example** and you can launch the example.
 
 The _ExampleViewController_ displays a list of saved cards for a given customer.
 
-To create the card token, you will need to instantiate the checkout API Client `CheckoutAPIClient` with
+To create the card token, you will need to instantiate the checkout API Client `CheckoutService` with
 your public key. If you don't have one already, go to the checkout.com website to get a sandbox account.
 
 ```swift
     let publicKey = "pk_test_03728582-062b-419c-91b5-63ac2a481e07"
-    var checkoutAPIClient: CheckoutAPIClient {
-        return CheckoutAPIClient(publicKey: publicKey, environment: .sandbox)
+    var checkoutService: CheckoutService {
+        return CheckoutService(publicKey: publicKey, environment: .sandbox)
     }
 ```
 
@@ -87,7 +87,7 @@ in the form.
 ```
 
 We specified which schemes are allowed.
-By default, all schemes are allowed (see `CardScheme`). You can also used the `CheckoutAPIClient` to
+By default, all schemes are allowed (see `CardScheme`). You can also used the `CheckoutService` to
 get the list of card providers that you set in the hub.
 
 The controller must conform to the delegate `CardViewControllerDelegate`.
