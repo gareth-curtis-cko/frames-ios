@@ -163,6 +163,7 @@ public class CardViewController: UIViewController,
     }
 
     @objc func onTapDoneCardButton() {
+        view.endEditing(true)
         // Get the values
         guard let cardNumber = cardView.cardNumberInputView.textField.text else { return }
         guard let expirationDate = cardView.expirationDateInputView.textField.text else { return }
