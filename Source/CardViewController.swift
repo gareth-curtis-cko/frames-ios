@@ -170,9 +170,11 @@ public class CardViewController: UIViewController,
 
         let cardNumberStandardized = CardUtils.standardize(cardNumber: cardNumber)
         // Validate the values
-        guard
-            let cardType = CardUtils.getTypeOf(cardNumber: cardNumberStandardized)
-            else { return }
+        guard let cardType = CardUtils.getTypeOf(cardNumber: cardNumberStandardized) else {
+            let message = "cardNumberInvalid".localized(forClass: CardViewController.self)
+            cardView.cardNumberInputView.showError(message: message)
+            return
+        }
         let (expiryMonth, expiryYear) = CardUtils.standardize(expirationDate: expirationDate)
         // card number invalid
         let isCardNumberValid = CardUtils.isValid(cardNumber: cardNumberStandardized, cardType: cardType)
