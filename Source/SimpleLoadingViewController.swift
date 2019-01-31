@@ -17,20 +17,20 @@ public class SimpleLoadingViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = CheckoutTheme.primaryBackgroundColor
-        label.text = "Loading"
-        activityIndicator.color = .black
-        activityIndicator.startAnimating()
-        addViews()
-        addConstraints()
+        setupSubviews()
+        setupConstraints()
     }
 
-    private func addViews() {
+    private func setupSubviews() {
         view.addSubview(container)
         container.addSubview(label)
         container.addSubview(activityIndicator)
+        label.text = "Loading"
+        activityIndicator.color = .black
+        activityIndicator.startAnimating()
     }
 
-    private func addConstraints() {
+    private func setupConstraints() {
         container.translatesAutoresizingMaskIntoConstraints = false
         label.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
