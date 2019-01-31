@@ -11,10 +11,7 @@ public protocol CountrySelectionViewControllerDelegate: class {
 }
 
 /// A view controller that allows the user to select a country.
-public class CountrySelectionViewController: UIViewController,
-    UITableViewDelegate,
-    UITableViewDataSource,
-    UISearchBarDelegate {
+public class CountrySelectionViewController: UIViewController {
 
     // MARK: - Properties
 
@@ -42,29 +39,30 @@ public class CountrySelectionViewController: UIViewController,
     /// Called after the controller's view is loaded into memory.
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+
         view.backgroundColor = CheckoutTheme.primaryBackgroundColor
         navigationItem.title = "countryRegion".localized(forClass: CountrySelectionViewController.self)
-        // table view
+
         filteredCountries = countries
+
+        setupSubviews()
+        setupConstraints()
+    }
+
+    private func setupSubviews() {
         tableView.delegate = self
         tableView.dataSource = self
-        // search bar
         searchBar.delegate = self
 
         tableView.backgroundColor = CheckoutTheme.primaryBackgroundColor
         searchBar.barStyle = CheckoutTheme.barStyle
-    }
 
-    private func setup() {
-        // add views
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "countryCell")
         view.addSubview(searchBar)
         view.addSubview(tableView)
-        addConstraints()
     }
 
-    private func addConstraints() {
+    private func setupConstraints() {
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.topAnchor.constraint(equalTo: view.safeTopAnchor).isActive = true
         searchBar.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor).isActive = true
@@ -77,17 +75,21 @@ public class CountrySelectionViewController: UIViewController,
         tableView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor).isActive = true
     }
 
-    // MARK: - UITableViewDataSource
+    func updateSearchResults(text: String?) {
+        guard let searchText = text else { return }
+        filteredCountries = countries.filter { country in
+            return country.0.lowercased().contains(searchText.lowercased())
+        }
+        tableView.reloadData()
+    }
+
+}
+
+extension CountrySelectionViewController: UITableViewDataSource {
 
     /// Asks the data source to return the number of sections in the table view.
     public func numberOfSections(in tableView: UITableView) -> Int {
         return 1
-    }
-
-    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = CheckoutTheme.tertiaryBackgroundColor
-        cell.textLabel?.font = CheckoutTheme.font
-        cell.textLabel?.textColor = CheckoutTheme.color
     }
 
     /// Tells the data source to return the number of rows in a given section of a table view.
@@ -101,23 +103,25 @@ public class CountrySelectionViewController: UIViewController,
         cell.textLabel?.text = filteredCountries[indexPath.row].0
         return cell
     }
+}
 
-    /// Tells the delegate that the specified row is now selected.
+extension CountrySelectionViewController: UITableViewDelegate {
+
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = CheckoutTheme.tertiaryBackgroundColor
+        cell.textLabel?.font = CheckoutTheme.font
+        cell.textLabel?.textColor = CheckoutTheme.color
+    }
+
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.onCountrySelected(country: filteredCountries[indexPath.row].0,
                                     regionCode: filteredCountries[indexPath.row].1)
         navigationController?.popViewController(animated: true)
     }
 
-    func updateSearchResults(text: String?) {
-        guard let searchText = text else { return }
-        filteredCountries = countries.filter { country in
-            return country.0.lowercased().contains(searchText.lowercased())
-        }
-        tableView.reloadData()
-    }
+}
 
-    // MARK: - UISearchBarDelegate
+extension CountrySelectionViewController: UISearchBarDelegate {
 
     /// Tells the delegate that the user changed the search text.
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

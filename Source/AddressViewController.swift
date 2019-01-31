@@ -36,14 +36,8 @@ public class AddressViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
-    /// Returns a newly initialized view controller with the nib file in the specified bundle.
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-
-    /// Returns an object initialized from data in a given unarchiver.
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     // MARK: - Lifecycle
