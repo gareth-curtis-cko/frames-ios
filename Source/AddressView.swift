@@ -24,6 +24,7 @@ public class AddressView: UIView {
 
     let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done,
                                      target: self, action: nil)
+    var scrollViewBottomConstraint: NSLayoutConstraint?
     var notificationCenter: NotificationCenter = NotificationCenter.default
     var regionCodeSelected: String?
 
@@ -92,6 +93,7 @@ public class AddressView: UIView {
     }
 
     private func addInitialConstraints() {
+        scrollViewBottomConstraint = addScrollViewContraints(scrollView: scrollView, contentView: contentView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         translatesAutoresizingMaskIntoConstraints = false
