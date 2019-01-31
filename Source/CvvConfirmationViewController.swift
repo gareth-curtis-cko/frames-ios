@@ -49,23 +49,25 @@ public class CvvConfirmationViewController: UIViewController {
                                                             target: self,
                                                             action: #selector(onConfirmCvv))
         view.backgroundColor = .groupTableViewBackground
+        
+        setupSubviews()
+        setupConstraints()
+    }
+
+    private func setupSubviews() {
+        contentView.addSubview(label)
+        contentView.addSubview(textField)
+        contentView.addSubview(underlineView)
+        view.addSubview(contentView)
+        
         contentView.backgroundColor = CheckoutTheme.secondaryBackgroundColor
         label.text = "Enter your cvv."
         textField.placeholder = "CVV"
         textField.keyboardType = .numberPad
         underlineView.backgroundColor = UIColor.gray
-        addViews()
-        addConstraints()
     }
 
-    private func addViews() {
-        contentView.addSubview(label)
-        contentView.addSubview(textField)
-        contentView.addSubview(underlineView)
-        view.addSubview(contentView)
-    }
-
-    private func addConstraints() {
+    private func setupConstraints() {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         label.translatesAutoresizingMaskIntoConstraints = false
         textField.translatesAutoresizingMaskIntoConstraints = false

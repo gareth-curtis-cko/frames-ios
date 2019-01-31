@@ -411,6 +411,14 @@
 			name = CountrySelectionViewController;
 			sourceTree = "<group>";
 		};
+		05D34DD122032C6D0058A53F /* CvvConfirmationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E653FEFF20C59CCC002E4790 /* CvvConfirmationViewController.swift */,
+			);
+			name = CvvConfirmationViewController;
+			sourceTree = "<group>";
+		};
 		B591B24786EFC6634F7201B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -445,7 +453,7 @@
 				05D34DCC22030F210058A53F /* CardViewController */,
 				05D34DCF220329DB0058A53F /* AddressViewController */,
 				05D34DD022032BFC0058A53F /* CountrySelectionViewController */,
-				E653FEFF20C59CCC002E4790 /* CvvConfirmationViewController.swift */,
+				05D34DD122032C6D0058A53F /* CvvConfirmationViewController */,
 				E653FEFD20C58FA9002E4790 /* SimpleLoadingViewController.swift */,
 				E61D068B20C02714007FC847 /* ThreedsWebViewController.swift */,
 				E61101A320C95984000BB9F4 /* Views */,
