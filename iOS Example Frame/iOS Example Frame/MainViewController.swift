@@ -23,13 +23,10 @@ class MainViewController: UIViewController, CardViewControllerDelegate {
     }
 
     var cardViewController: CardViewController {
-        let checkoutService = CheckoutService(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
-                                                  environment: .sandbox)
-        let b = CardViewController(checkoutApiClient: checkoutService, cardHolderNameState: .normal, billingDetailsState: .normal, defaultRegionCode: "UK")
-        b.billingDetailsAddress = CkoAddress(addressLine1: "yo", addressLine2: "yo", city: "yo", state: "yo", postcode: "yo", country: "uk", phone: nil)
-        b.delegate = self
-        b.addressViewController.setFields(address: b.billingDetailsAddress!)
-        return b
+        let aViewController = CardViewController(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07", environment: .sandbox, cardHolderNameState: .normal, billingDetailsState: .normal, defaultRegionCode: "UK")
+        aViewController.billingDetailsAddress = CkoAddress(addressLine1: "yo", addressLine2: "yo", city: "yo", state: "yo", postcode: "yo", country: "uk", phone: nil)
+        aViewController.delegate = self
+        return aViewController
     }
 
     @IBAction func onClickGoToPaymentPage(_ sender: Any) {
@@ -44,11 +41,7 @@ class MainViewController: UIViewController, CardViewControllerDelegate {
         cardViewController.availableSchemes = [.visa, .mastercard, .maestro]
         cardViewController.setDefault(regionCode: "UK")
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        cardViewController.addressViewController.setCountrySelected(country: "yo", regionCode: "yo")
-    }
-    
+        
     func onTapDone(controller: CardViewController, cardToken: CkoCardTokenResponse?, status: CheckoutTokenStatus) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
         switch status {

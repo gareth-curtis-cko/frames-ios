@@ -23,15 +23,22 @@ public class CardViewController: UIViewController,
     // MARK: - Properties
 
     /// Card View
-    public let cardView: CardView
-    public let checkoutApiClient: CheckoutService?
+    let cardView: CardView
+    let checkoutService: CheckoutService?
 
     let cardHolderNameState: InputState
     let billingDetailsState: InputState
 
-    public var billingDetailsAddress: CkoAddress?
+    public var billingDetailsAddress: CkoAddress? {
+        didSet {
+            if let address = billingDetailsAddress {
+                addressViewController.setFields(address: address)
+            }
+        }
+    }
+
     var notificationCenter = NotificationCenter.default
-    public let addressViewController: AddressViewController
+    private let addressViewController: AddressViewController
 
     /// List of available schemes
     public var availableSchemes: [CardScheme] = [.visa, .mastercard, .americanExpress,
@@ -52,15 +59,19 @@ public class CardViewController: UIViewController,
 
     // MARK: - Initialization
 
-    /// Returns a newly initialized view controller with the cardholder's name and billing details
-    /// state specified. You can specified the region using the Iso2 region code ("UK" for "United Kingdom")
-    public init(checkoutApiClient: CheckoutService, cardHolderNameState: InputState,
-                billingDetailsState: InputState, defaultRegionCode: String? = nil) {
-        self.checkoutApiClient = checkoutApiClient
+    /// Returns a newly initialized view controller with the supplied public key and chosen
+    /// environment, cardholder's name and billing details state specified. You can specify
+    /// the region using the Iso2 region code ("UK" for "United Kingdom")
+    public init(publicKey: String,
+                environment: Environment = .sandbox,
+                cardHolderNameState: InputState,
+                billingDetailsState: InputState,
+                defaultRegionCode: String? = nil) {
+        self.checkoutService = CheckoutService(publicKey: publicKey, environment: environment)
         self.cardHolderNameState = cardHolderNameState
         self.billingDetailsState = billingDetailsState
         cardView = CardView(cardHolderNameState: cardHolderNameState, billingDetailsState: billingDetailsState)
-        addressViewController = AddressViewController(initialCountry: "you", initialRegionCode: defaultRegionCode)
+        addressViewController = AddressViewController(initialCountry: "yo", initialRegionCode: defaultRegionCode)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -70,7 +81,7 @@ public class CardViewController: UIViewController,
         billingDetailsState = .required
         cardView = CardView(cardHolderNameState: cardHolderNameState, billingDetailsState: billingDetailsState)
         addressViewController = AddressViewController()
-        checkoutApiClient = nil
+        checkoutService = nil
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
@@ -80,7 +91,7 @@ public class CardViewController: UIViewController,
         billingDetailsState = .required
         cardView = CardView(cardHolderNameState: cardHolderNameState, billingDetailsState: billingDetailsState)
         addressViewController = AddressViewController()
-        checkoutApiClient = nil
+        checkoutService = nil
         super.init(coder: aDecoder)
     }
 
@@ -203,14 +214,13 @@ public class CardViewController: UIViewController,
                                     cvv: cvv,
                                     name: cardView.cardHolderNameInputView.textField.text,
                                     billingDetails: billingDetailsAddress)
-        if let checkoutApiClientUnwrap = checkoutApiClient {
-            delegate?.onSubmit(controller: self)
-            checkoutApiClientUnwrap.createCardToken(card: card, successHandler: { cardToken in
-                self.delegate?.onTapDone(controller: self, cardToken: cardToken, status: .success)
-            }, errorHandler: { _ in
-                self.delegate?.onTapDone(controller: self, cardToken: nil, status: .success)
-            })
-        }
+
+        delegate?.onSubmit(controller: self)
+        checkoutService?.createCardToken(card: card, successHandler: { cardToken in
+            self.delegate?.onTapDone(controller: self, cardToken: cardToken, status: .success)
+        }, errorHandler: { _ in
+            self.delegate?.onTapDone(controller: self, cardToken: nil, status: .success)
+        })
     }
 
     // MARK: - AddressViewControllerDelegate
