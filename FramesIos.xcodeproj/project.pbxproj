@@ -36,6 +36,7 @@
 		05D34DC62202F8BB0058A53F /* PartialFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D34DB62202F8BA0058A53F /* PartialFormatter.swift */; };
 		05D34DC72202F8BB0058A53F /* PhoneNumberKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D34DB72202F8BA0058A53F /* PhoneNumberKit.swift */; };
 		05D34DC92202F8BB0058A53F /* PhoneNumberParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D34DB92202F8BA0058A53F /* PhoneNumberParser.swift */; };
+		05D34DCE22030F460058A53F /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D34DCD22030F460058A53F /* CardViewModel.swift */; };
 		C05921A046069B80E37C8799 /* Pods_FramesIosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 960B3E65C846C45B1B539F24 /* Pods_FramesIosTests.framework */; };
 		E608734620C689BB004E280C /* ThreedsWebViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E608734520C689BB004E280C /* ThreedsWebViewControllerTests.swift */; };
 		E60A5E5820CFCCA000EB7589 /* PhoneNumberMetadata.json in Resources */ = {isa = PBXBuildFile; fileRef = E60A5E5720CFCCA000EB7589 /* PhoneNumberMetadata.json */; };
@@ -194,6 +195,7 @@
 		05D34DB62202F8BA0058A53F /* PartialFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialFormatter.swift; sourceTree = "<group>"; };
 		05D34DB72202F8BA0058A53F /* PhoneNumberKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberKit.swift; sourceTree = "<group>"; };
 		05D34DB92202F8BA0058A53F /* PhoneNumberParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberParser.swift; sourceTree = "<group>"; };
+		05D34DCD22030F460058A53F /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		7A05DCA3DA23A5B90A28088B /* Pods-FramesIosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FramesIosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FramesIosTests/Pods-FramesIosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8DBAC9EA5BF3D8D794691344 /* Pods-FramesIosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FramesIosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FramesIosTests/Pods-FramesIosTests.release.xcconfig"; sourceTree = "<group>"; };
 		960B3E65C846C45B1B539F24 /* Pods_FramesIosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FramesIosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -384,6 +386,15 @@
 			path = PhoneNumberKit;
 			sourceTree = "<group>";
 		};
+		05D34DCC22030F210058A53F /* CardViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E63352E020A45C07002C61C0 /* CardViewController.swift */,
+				05D34DCD22030F460058A53F /* CardViewModel.swift */,
+			);
+			name = CardViewController;
+			sourceTree = "<group>";
+		};
 		B591B24786EFC6634F7201B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,8 +426,8 @@
 		E631CB7D2098B5A800023472 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				05D34DCC22030F210058A53F /* CardViewController */,
 				E63352D720A2EE09002C61C0 /* AddressViewController.swift */,
-				E63352E020A45C07002C61C0 /* CardViewController.swift */,
 				E6DC28FA20A1D9EE009FA38B /* CountrySelectionViewController.swift */,
 				E653FEFF20C59CCC002E4790 /* CvvConfirmationViewController.swift */,
 				E653FEFD20C58FA9002E4790 /* SimpleLoadingViewController.swift */,
@@ -925,6 +936,7 @@
 				E63352E120A45C07002C61C0 /* CardViewController.swift in Sources */,
 				E664702620CEDD7500D8353A /* PhoneNumberInputView.swift in Sources */,
 				E664071B208DE11D000431E5 /* Endpoint.swift in Sources */,
+				05D34DCE22030F460058A53F /* CardViewModel.swift in Sources */,
 				E6646FB820CE9FD400D8353A /* CkoAddress.swift in Sources */,
 				E67AB994208E1CC600593FBE /* CardProvider.swift in Sources */,
 				05D34DBF2202F8BB0058A53F /* ParseManager.swift in Sources */,

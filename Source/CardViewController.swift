@@ -4,7 +4,7 @@ import UIKit
 /// Method that you can use to manage the editing of the expiration date.
 public protocol CardViewControllerDelegate: class {
 
-    /// Executed when an user tap on the done button.
+    /// Executed when a user taps on the done button.
     ///
     /// - parameter controller: `CardViewController`
     /// - parameter card: Card entered by the user
@@ -14,17 +14,12 @@ public protocol CardViewControllerDelegate: class {
 }
 
 /// A view controller that allows the user to enter card information.
-public class CardViewController: UIViewController,
-    AddressViewControllerDelegate,
-    CardNumberInputViewDelegate,
-    CvvInputViewDelegate,
-    UITextFieldDelegate {
+public class CardViewController: UIViewController {
 
     // MARK: - Properties
 
-    /// Card View
+    let viewModel: CardViewModel
     let cardView: CardView
-    let checkoutService: CheckoutService?
 
     let cardHolderNameState: InputState
     let billingDetailsState: InputState
@@ -37,7 +32,7 @@ public class CardViewController: UIViewController,
         }
     }
 
-    var notificationCenter = NotificationCenter.default
+    private let notificationCenter = NotificationCenter.default
     private let addressViewController: AddressViewController
 
     /// List of available schemes
@@ -67,7 +62,7 @@ public class CardViewController: UIViewController,
                 cardHolderNameState: InputState,
                 billingDetailsState: InputState,
                 defaultRegionCode: String? = nil) {
-        self.checkoutService = CheckoutService(publicKey: publicKey, environment: environment)
+        self.viewModel = CardViewModel(with: publicKey, and: environment)
         self.cardHolderNameState = cardHolderNameState
         self.billingDetailsState = billingDetailsState
         cardView = CardView(cardHolderNameState: cardHolderNameState, billingDetailsState: billingDetailsState)
@@ -75,24 +70,8 @@ public class CardViewController: UIViewController,
         super.init(nibName: nil, bundle: nil)
     }
 
-    /// Returns a newly initialized view controller with the nib file in the specified bundle.
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        cardHolderNameState = .required
-        billingDetailsState = .required
-        cardView = CardView(cardHolderNameState: cardHolderNameState, billingDetailsState: billingDetailsState)
-        addressViewController = AddressViewController()
-        checkoutService = nil
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-
-    /// Returns an object initialized from data in a given unarchiver.
-    required public init?(coder aDecoder: NSCoder) {
-        cardHolderNameState = .required
-        billingDetailsState = .required
-        cardView = CardView(cardHolderNameState: cardHolderNameState, billingDetailsState: billingDetailsState)
-        addressViewController = AddressViewController()
-        checkoutService = nil
-        super.init(coder: aDecoder)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     // MARK: - Lifecycle
@@ -100,6 +79,7 @@ public class CardViewController: UIViewController,
     /// Called after the controller's view is loaded into memory.
     override public func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
         rightBarButtonItem.target = self
         rightBarButtonItem.action = #selector(onTapDoneCardButton)
         navigationItem.rightBarButtonItem = rightBarButtonItem
@@ -208,32 +188,16 @@ public class CardViewController: UIViewController,
         }
         if !isCardNumberValid || !isExpirationDateValid || !isCvvValid || !isCardTypeValid { return }
 
-        let card = CkoCardTokenRequest(number: cardNumberStandardized,
+        let cardTokenRequest = CkoCardTokenRequest(number: cardNumberStandardized,
                                     expiryMonth: expiryMonth,
                                     expiryYear: expiryYear,
                                     cvv: cvv,
                                     name: cardView.cardHolderNameInputView.textField.text,
                                     billingDetails: billingDetailsAddress)
 
+        viewModel.createCardToken(card: cardTokenRequest)
+
         delegate?.onSubmit(controller: self)
-        checkoutService?.createCardToken(card: card, successHandler: { cardToken in
-            self.delegate?.onTapDone(controller: self, cardToken: cardToken, status: .success)
-        }, errorHandler: { _ in
-            self.delegate?.onTapDone(controller: self, cardToken: nil, status: .success)
-        })
-    }
-
-    // MARK: - AddressViewControllerDelegate
-
-    /// Executed when an user tap on the done button.
-    public func onTapDoneButton(controller: AddressViewController, address: CkoAddress) {
-        billingDetailsAddress = address
-        let value = "\(address.addressLine1 ?? ""), \(address.city ?? "")"
-        cardView.billingDetailsInputView.value.text = value
-        validateFieldsValues()
-        // return to CardViewController
-        topConstraint?.isActive = false
-        controller.navigationController?.popViewController(animated: true)
     }
 
     private func addTextFieldsDelegate() {
@@ -276,13 +240,6 @@ public class CardViewController: UIViewController,
         scrollViewOnKeyboardWillHide(notification: notification, scrollView: cardView.scrollView)
     }
 
-    // MARK: - UITextFieldDelegate
-
-    /// Tells the delegate that editing stopped for the specified text field.
-    public func textFieldDidEndEditing(_ textField: UITextField) {
-        validateFieldsValues()
-    }
-
     /// Tells the delegate that editing stopped for the textfield in the specified view.
     public func textFieldDidEndEditing(view: UIView) {
         validateFieldsValues()
@@ -295,7 +252,33 @@ public class CardViewController: UIViewController,
         }
     }
 
-    // MARK: - CardNumberInputViewDelegate
+}
+
+extension CardViewController: AddressViewControllerDelegate {
+
+    /// Executed when a user taps on the done button.
+    public func onTapDoneButton(controller: AddressViewController, address: CkoAddress) {
+        billingDetailsAddress = address
+        let value = "\(address.addressLine1 ?? ""), \(address.city ?? "")"
+        cardView.billingDetailsInputView.value.text = value
+        validateFieldsValues()
+        // return to CardViewController
+        topConstraint?.isActive = false
+        controller.navigationController?.popViewController(animated: true)
+    }
+
+}
+
+extension CardViewController: UITextFieldDelegate {
+
+    /// Tells the delegate that editing stopped for the specified text field.
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        validateFieldsValues()
+    }
+
+}
+
+extension CardViewController: CardNumberInputViewDelegate {
 
     /// Called when the card number changed.
     public func onChangeCardNumber(cardType: CardType?) {
@@ -319,11 +302,20 @@ public class CardViewController: UIViewController,
             lastSelected = imageView
         }
     }
+}
 
-    // MARK: CvvInputViewDelegate
+extension CardViewController: CvvInputViewDelegate {
 
     public func onChangeCvv() {
         validateFieldsValues()
+    }
+
+}
+
+extension CardViewController: CardViewModelDelegate {
+
+    func viewModelDidGenerateToken(cardTokenResponse: CkoCardTokenResponse?, status: CheckoutTokenStatus) {
+        delegate?.onTapDone(controller: self, cardToken: cardTokenResponse, status: status)
     }
 
 }

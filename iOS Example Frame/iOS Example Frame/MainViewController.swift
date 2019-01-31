@@ -53,7 +53,7 @@ class MainViewController: UIViewController, CardViewControllerDelegate {
     }
 
     private func showAlert(with cardToken: String) {
-        let alert = UIAlertController(title: "Payment",
+        let alert = UIAlertController(title: nil,
                                       message: cardToken, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default) { _ in
             alert.dismiss(animated: true, completion: nil)
