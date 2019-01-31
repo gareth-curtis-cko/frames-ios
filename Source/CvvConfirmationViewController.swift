@@ -49,7 +49,7 @@ public class CvvConfirmationViewController: UIViewController {
                                                             target: self,
                                                             action: #selector(onConfirmCvv))
         view.backgroundColor = .groupTableViewBackground
-        
+
         setupSubviews()
         setupConstraints()
     }
@@ -59,7 +59,7 @@ public class CvvConfirmationViewController: UIViewController {
         contentView.addSubview(textField)
         contentView.addSubview(underlineView)
         view.addSubview(contentView)
-        
+
         contentView.backgroundColor = CheckoutTheme.secondaryBackgroundColor
         label.text = "Enter your cvv."
         textField.placeholder = "CVV"
