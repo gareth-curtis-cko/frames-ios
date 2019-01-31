@@ -12,8 +12,7 @@ public protocol ThreedsWebViewControllerDelegate: class {
 }
 
 /// A view controller to manage 3ds
-public class ThreedsWebViewController: UIViewController,
-    WKNavigationDelegate {
+public class ThreedsWebViewController: UIViewController {
 
     // MARK: - Properties
 
@@ -70,23 +69,6 @@ public class ThreedsWebViewController: UIViewController,
         webView.load(myRequest)
     }
 
-    // MARK: - WKNavigationDelegate
-
-    /// Called when the web view begins to receive web content.
-    public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation) {
-        guard let url = webView.url else { return }
-        shouldDismiss(absoluteUrl: url)
-    }
-
-    /// Called when a web view receives a server redirect.
-    public func webView(_ webView: WKWebView,
-                        didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation) {
-        guard let url = webView.url else { return }
-        // stop the redirection
-        webView.stopLoading()
-        shouldDismiss(absoluteUrl: url)
-    }
-
     private func shouldDismiss(absoluteUrl: URL) {
         // get URL conforming to RFC 1808 without the query
         let url = "\(absoluteUrl.scheme ?? "https")://\(absoluteUrl.host ?? "localhost")\(absoluteUrl.path)"
@@ -102,6 +84,24 @@ public class ThreedsWebViewController: UIViewController,
                 self.delegate?.onFailure3D()
             }
         }
+    }
+}
+
+extension ThreedsWebViewController: WKNavigationDelegate {
+
+    /// Called when the web view begins to receive web content.
+    public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation) {
+        guard let url = webView.url else { return }
+        shouldDismiss(absoluteUrl: url)
+    }
+
+    /// Called when a web view receives a server redirect.
+    public func webView(_ webView: WKWebView,
+                        didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation) {
+        guard let url = webView.url else { return }
+        // stop the redirection
+        webView.stopLoading()
+        shouldDismiss(absoluteUrl: url)
     }
 
 }
