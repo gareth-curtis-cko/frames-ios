@@ -16,16 +16,6 @@
 		E6BEBDDA20C1778800C3130A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6BEBDD820C1778800C3130A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		E6BEBDE120C1778800C3130A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E6BEBDC420C1778500C3130A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E6BEBDCB20C1778600C3130A;
-			remoteInfo = "iOS Example Custom";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		E6BEBDF420C1A94E00C3130A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -49,7 +39,6 @@
 		E6BEBDD620C1778800C3130A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6BEBDD920C1778800C3130A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E6BEBDDB20C1778800C3130A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E6BEBDE020C1778800C3130A /* iOS Example CustomUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS Example CustomUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +47,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E620C49C20EA2AE000045DC6 /* FramesIos.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E6BEBDDD20C1778800C3130A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,7 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				E6BEBDCC20C1778600C3130A /* iOS Example Custom.app */,
-				E6BEBDE020C1778800C3130A /* iOS Example CustomUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,24 +112,6 @@
 			productReference = E6BEBDCC20C1778600C3130A /* iOS Example Custom.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E6BEBDDF20C1778800C3130A /* iOS Example CustomUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E6BEBDEC20C1778800C3130A /* Build configuration list for PBXNativeTarget "iOS Example CustomUITests" */;
-			buildPhases = (
-				E6BEBDDC20C1778800C3130A /* Sources */,
-				E6BEBDDD20C1778800C3130A /* Frameworks */,
-				E6BEBDDE20C1778800C3130A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E6BEBDE220C1778800C3130A /* PBXTargetDependency */,
-			);
-			name = "iOS Example CustomUITests";
-			productName = "iOS Example CustomUITests";
-			productReference = E6BEBDE020C1778800C3130A /* iOS Example CustomUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -161,10 +124,6 @@
 				TargetAttributes = {
 					E6BEBDCB20C1778600C3130A = {
 						CreatedOnToolsVersion = 9.4;
-					};
-					E6BEBDDF20C1778800C3130A = {
-						CreatedOnToolsVersion = 9.4;
-						TestTargetID = E6BEBDCB20C1778600C3130A;
 					};
 				};
 			};
@@ -182,7 +141,6 @@
 			projectRoot = "";
 			targets = (
 				E6BEBDCB20C1778600C3130A /* iOS Example Custom */,
-				E6BEBDDF20C1778800C3130A /* iOS Example CustomUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -198,13 +156,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6BEBDDE20C1778800C3130A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -217,22 +168,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6BEBDDC20C1778800C3130A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E6BEBDE220C1778800C3130A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E6BEBDCB20C1778600C3130A /* iOS Example Custom */;
-			targetProxy = E6BEBDE120C1778800C3130A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E6BEBDD320C1778600C3130A /* Main.storyboard */ = {
@@ -404,46 +340,6 @@
 			};
 			name = Release;
 		};
-		E6BEBDED20C1778800C3130A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 635KC97JGT;
-				INFOPLIST_FILE = "iOS Example CustomUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.floriel.iOS-Example-CustomUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "iOS Example Custom";
-			};
-			name = Debug;
-		};
-		E6BEBDEE20C1778800C3130A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 635KC97JGT;
-				INFOPLIST_FILE = "iOS Example CustomUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.floriel.iOS-Example-CustomUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "iOS Example Custom";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -461,15 +357,6 @@
 			buildConfigurations = (
 				E6BEBDEA20C1778800C3130A /* Debug */,
 				E6BEBDEB20C1778800C3130A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E6BEBDEC20C1778800C3130A /* Build configuration list for PBXNativeTarget "iOS Example CustomUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E6BEBDED20C1778800C3130A /* Debug */,
-				E6BEBDEE20C1778800C3130A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
