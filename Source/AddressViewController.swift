@@ -12,9 +12,7 @@ public protocol AddressViewControllerDelegate: class {
 }
 
 /// A view controller that allows the user to enter address information.
-public class AddressViewController: UIViewController,
-    CountrySelectionViewControllerDelegate,
-    UITextFieldDelegate {
+public class AddressViewController: UIViewController {
 
     // MARK: - Properties
 
@@ -188,20 +186,6 @@ public class AddressViewController: UIViewController,
         addressView.countryRegionInputView.value.text = country
     }
 
-    // MARK: - CountrySelectionViewControllerDelegate
-
-    /// Executed when an user select a country.
-    public func onCountrySelected(country: String, regionCode: String) {
-        setCountrySelected(country: country, regionCode: regionCode)
-    }
-
-    // MARK: - UITextFieldDelegate
-
-    /// Tells the delegate that editing stopped for the specified text field.
-    public func textFieldDidEndEditing(_ textField: UITextField) {
-        validateFieldsValues()
-    }
-
     public func setFields(address: CkoAddress) {
         addressView.addressLine1InputView.textField.text = address.addressLine1
         addressView.addressLine2InputView.textField.text = address.addressLine2
@@ -213,6 +197,24 @@ public class AddressViewController: UIViewController,
             let formattedString = "+\(address.phone?.countryCode ?? "")\(address.phone?.number ?? "")"
             addressView.phoneInputView.textField.text = formattedString
         }
+    }
+
+}
+
+extension AddressViewController: CountrySelectionViewControllerDelegate {
+
+    /// Executed when a user selects a country.
+    public func onCountrySelected(country: String, regionCode: String) {
+        setCountrySelected(country: country, regionCode: regionCode)
+    }
+
+}
+
+extension AddressViewController: UITextFieldDelegate {
+
+    /// Tells the delegate that editing stopped for the specified text field.
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        validateFieldsValues()
     }
 
 }

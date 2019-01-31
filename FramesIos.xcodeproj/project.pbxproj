@@ -395,6 +395,14 @@
 			name = CardViewController;
 			sourceTree = "<group>";
 		};
+		05D34DCF220329DB0058A53F /* AddressViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E63352D720A2EE09002C61C0 /* AddressViewController.swift */,
+			);
+			name = AddressViewController;
+			sourceTree = "<group>";
+		};
 		B591B24786EFC6634F7201B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,7 +435,7 @@
 			isa = PBXGroup;
 			children = (
 				05D34DCC22030F210058A53F /* CardViewController */,
-				E63352D720A2EE09002C61C0 /* AddressViewController.swift */,
+				05D34DCF220329DB0058A53F /* AddressViewController */,
 				E6DC28FA20A1D9EE009FA38B /* CountrySelectionViewController.swift */,
 				E653FEFF20C59CCC002E4790 /* CvvConfirmationViewController.swift */,
 				E653FEFD20C58FA9002E4790 /* SimpleLoadingViewController.swift */,
