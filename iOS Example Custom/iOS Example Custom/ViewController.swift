@@ -15,18 +15,10 @@ class ViewController: UIViewController {
         return CheckoutService(publicKey: "pk_test_03728582-062b-419c-91b5-63ac2a481e07",
                                  environment: .sandbox)
     }
+    
     @IBOutlet weak var cardNumberView: CardNumberInputView!
     @IBOutlet weak var expirationDateView: ExpirationDateInputView!
     @IBOutlet weak var cvvView: CvvInputView!
-    @IBAction func onTapPay(_ sender: Any) {
-        let card = getCardTokenRequest()
-        print(card)
-        checkoutService.createCardToken(card: card, successHandler: { cardToken in
-            self.showAlert(with: cardToken.id)
-        }, errorHandler: { error in
-            print(error)
-        })
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +34,18 @@ class ViewController: UIViewController {
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func onTapPay(_ sender: Any) {
+        view.endEditing(true)
+        
+        let card = getCardTokenRequest()
+        print(card)
+        checkoutService.createCardToken(card: card, successHandler: { cardToken in
+            self.showAlert(with: cardToken.id)
+        }, errorHandler: { error in
+            self.showAlert(with: error.message)
+        })
     }
-
+    
     private func getCardTokenRequest() -> CkoCardTokenRequest {
         let cardNumber = CardUtils.standardize(cardNumber: cardNumberView.textField.text!)
         let expirationDate = expirationDateView.textField.text
@@ -55,9 +54,9 @@ class ViewController: UIViewController {
         return CkoCardTokenRequest(number: cardNumber, expiryMonth: expiryMonth, expiryYear: expiryYear, cvv: cvv!)
     }
 
-    private func showAlert(with cardToken: String) {
-        let alert = UIAlertController(title: "Payment",
-                                      message: cardToken, preferredStyle: .alert)
+    private func showAlert(with message: String) {
+        let alert = UIAlertController(title: nil,
+                                      message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default) { _ in
             alert.dismiss(animated: true, completion: nil)
         }
