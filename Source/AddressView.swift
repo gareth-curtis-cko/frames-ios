@@ -1,6 +1,5 @@
 import Foundation
 import UIKit
-import PhoneNumberKit
 
 /// Address View displaying a form to enter address information.
 public class AddressView: UIView {

@@ -1,5 +1,4 @@
 import Foundation
-import Alamofire
 
 /// Used to call the Checkout API available with your public key
 public class CheckoutService {

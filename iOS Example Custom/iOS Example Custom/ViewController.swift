@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         let cardNumber = CardUtils.standardize(cardNumber: cardNumberView.textField.text!)
         let expirationDate = expirationDateView.textField.text
         let cvv = cvvView.textField.text
-        let (expiryMonth, expiryYear) = cardUtils.standardize(expirationDate: expirationDate!)
+        let (expiryMonth, expiryYear) = CardUtils.standardize(expirationDate: expirationDate!)
         return CkoCardTokenRequest(number: cardNumber, expiryMonth: expiryMonth, expiryYear: expiryYear, cvv: cvv!)
     }
 

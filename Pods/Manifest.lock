@@ -1,5 +1,4 @@
 PODS:
-  - Alamofire (4.8.0)
   - Mockingjay (2.0.1):
     - Mockingjay/Core (= 2.0.1)
     - Mockingjay/XCTest (= 2.0.1)
@@ -7,32 +6,20 @@ PODS:
     - URITemplate (~> 2.0)
   - Mockingjay/XCTest (2.0.1):
     - Mockingjay/Core
-  - PhoneNumberKit (2.5.0):
-    - PhoneNumberKit/PhoneNumberKitCore (= 2.5.0)
-    - PhoneNumberKit/UIKit (= 2.5.0)
-  - PhoneNumberKit/PhoneNumberKitCore (2.5.0)
-  - PhoneNumberKit/UIKit (2.5.0):
-    - PhoneNumberKit/PhoneNumberKitCore
   - URITemplate (2.0.3)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.7)
   - Mockingjay (~> 2.0)
-  - PhoneNumberKit (~> 2.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Alamofire
     - Mockingjay
-    - PhoneNumberKit
     - URITemplate
 
 SPEC CHECKSUMS:
-  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   Mockingjay: 11a621880d2887f1775bdcf824341eb68f218450
-  PhoneNumberKit: 32a1cd1e0aa9e950feb01886a22fd7386b8cf903
   URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
 
-PODFILE CHECKSUM: 464dae4d38f4f89b6c645ca505c1545d8fbb0243
+PODFILE CHECKSUM: d2c2e34adc8f45e1035f7d9ea63b29f9fc5a2f13
 
 COCOAPODS: 1.5.3

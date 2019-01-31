@@ -1,5 +1,4 @@
 import UIKit
-import PhoneNumberKit
 
 /// Standard Input View containing a label and an input field.
 @IBDesignable public class PhoneNumberInputView: StandardInputView, UITextFieldDelegate {
